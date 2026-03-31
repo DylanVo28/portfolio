@@ -2,42 +2,42 @@ import Image from "next/image";
 
 const profileFields = [
   { label: "Name", value: "Dinh Nguyen", compact: true },
-  { label: "Occupation", value: "Frontend Engineer" },
-  { label: "Stack", value: "Next.js / React / TS", compact: true },
+  { label: "Role", value: "Frontend Developer" },
+  { label: "Experience", value: "4 Years Building Web UI", compact: true },
 ];
 
-const heroChips = ["Next 16", "React 19", "Motion UI", "Design Systems"];
+const heroChips = ["4 Years", "Next.js", "React", "React Native", "NestJS"];
 
 const tabs = [
-  { title: "Beginning", caption: "The story behind the work and the process." },
-  { title: "Projects", caption: "Selected product builds with clear outcomes." },
-  { title: "Systems", caption: "Reusable UI foundations for fast shipping." },
-  { title: "Experiments", caption: "Bold visual studies and interaction tests." },
-  { title: "Connect", caption: "Open channels for freelance and product teams." },
+  { title: "About", caption: "Who I am and how I approach frontend work." },
+  { title: "Projects", caption: "Selected case studies with clear product impact." },
+  { title: "Stack", caption: "React, Next.js, TypeScript, UI systems, motion." },
+  { title: "Experience", caption: "4 years shipping interfaces for real products." },
+  { title: "Contact", caption: "Available for teams building thoughtful web apps." },
 ];
 
 const rewards = [
-  { label: "Polish", value: "+05" },
-  { label: "Speed", value: "+21" },
+  { label: "UI", value: "+UX" },
+  { label: "Perf", value: "+DX" },
 ];
 
 const controls = [
-  { label: "Motion System", state: "✓", tone: "positive" },
-  { label: "Sound FX", state: "×", tone: "muted" },
-  { label: "Visual Tuning", state: "⚙", tone: "accent" },
+  { label: "Responsive UI", state: "✓", tone: "positive" },
+  { label: "Accessibility", state: "✓", tone: "positive" },
+  { label: "Motion Detail", state: "⚙", tone: "accent" },
 ];
 
 export default function Home() {
   return (
     <main className="landing-shell">
-      <section className="cyber-banner" aria-labelledby="hero-title">
+      <section className="cyber-banner" aria-label="Portfolio hero banner">
         <div className="cyber-banner__scanline" aria-hidden="true" />
 
         <header className="cyber-banner__topbar">
           <div className="topbar-metrics">
             <div className="topbar-metric">
-              <span className="topbar-metric__value">12</span>
-              <span className="topbar__tiny">Selected Cases</span>
+              <span className="topbar-metric__value">04</span>
+              <span className="topbar__tiny">Years Experience</span>
             </div>
 
             <div className="plus-box" aria-hidden="true">
@@ -46,16 +46,16 @@ export default function Home() {
 
             <div className="topbar-metric">
               <span className="topbar-metric__value topbar-metric__value--accent">
-                08
+                FE
               </span>
-              <span className="topbar__tiny">Systems Deployed</span>
+              <span className="topbar__tiny">Frontend Focus</span>
             </div>
           </div>
 
           <div className="topbar-flags">
-            <span>Status: Available</span>
-            <span>Base: HCMC / Remote</span>
-            <span>Stack: Next / TS</span>
+            <span>Frontend Developer</span>
+            <span>Based in Vietnam / Remote</span>
+            <span>Open to Product Teams</span>
           </div>
         </header>
 
@@ -82,13 +82,13 @@ export default function Home() {
 
             <div className="profile-panel__field">
               <p className="profile-panel__label">Availability</p>
-              <p className="cyber-badge">Open For Select Projects</p>
+              <p className="cyber-badge">Open For Frontend Roles</p>
             </div>
 
             <div className="profile-panel__field">
               <p className="profile-panel__label">Signal</p>
               <p className="cyber-badge">
-                Product UI / Motion
+                React / Next.js / UI Systems
                 <span aria-hidden="true">»</span>
               </p>
             </div>
@@ -96,11 +96,11 @@ export default function Home() {
             <div className="profile-panel__motto">
               <p className="profile-panel__label">Motto</p>
               <p className="profile-panel__quote">
-                Build fast.
+                Clean code.
                 <br />
-                Stay sharp.
+                Sharp UI.
                 <br />
-                Ship with taste.
+                Real product impact.
               </p>
             </div>
           </aside>
@@ -108,15 +108,18 @@ export default function Home() {
           <section className="hero-panel">
             <div className="hero-panel__copy">
               <p className="hero-panel__eyebrow">
-                Portfolio Transmission / App Router
+                Frontend Developer / 4 Years Experience
               </p>
 
+              <h1 className="hero-panel__title">
+                FRONTEND / WEB3 DEVELOPER
+              </h1>
 
-              <p className="hero-panel__description">
-                I design and build frontend experiences for teams that want
-                product UI with motion, structure, and a clear visual point of
-                view.
-              </p>
+              {/*<p className="hero-panel__description">*/}
+              {/*  I create responsive interfaces with React, Next.js, and*/}
+              {/*  TypeScript, focusing on performance, usability, and visual*/}
+              {/*  quality for products that need more than a template UI.*/}
+              {/*</p>*/}
 
               <div className="hero-panel__chips" aria-label="Core strengths">
                 {heroChips.map((chip) => (
@@ -127,7 +130,7 @@ export default function Home() {
               </div>
 
               <span className="hero-panel__sub">
-                Featured artwork / local asset / images/banner.png
+                Frontend portfolio / selected work / react and next.js
               </span>
             </div>
 
@@ -159,20 +162,20 @@ export default function Home() {
           </section>
 
           <aside className="cyber-panel mission-panel">
-            <p className="mission-panel__title">Active Quest</p>
-            <p className="mission-panel__subtitle">Portfolio Signal Line</p>
+            <p className="mission-panel__title">Current Focus</p>
+            <p className="mission-panel__subtitle">Frontend Portfolio System</p>
 
             <div className="mission-panel__group">
-              <p className="mission-panel__label">Quest Name</p>
-              <p className="mission-panel__name">Cyber Banner</p>
+              <p className="mission-panel__label">Focus Area</p>
+              <p className="mission-panel__name">Frontend Portfolio</p>
             </div>
 
             <div className="mission-panel__group">
               <p className="mission-panel__label">Goal</p>
               <p className="mission-panel__goal">
-                Translate a cinematic concept into a responsive Next.js hero
-                with strong art direction, clean implementation, and zero visual
-                dead weight.
+                Present 4 years of frontend experience through clear positioning,
+                selected projects, and a strong visual identity that feels
+                product-ready.
               </p>
             </div>
 
