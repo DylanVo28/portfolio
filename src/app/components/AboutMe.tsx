@@ -1,7 +1,7 @@
 const aboutProfileFields = [
   { label: "Name", value: "Dinh Nguyen" },
   { label: "Occupation", value: "Frontend Developer" },
-  { label: "Core Stack", value: "Next.js / React / TypeScript", compact: true },
+  { label: "Focus", value: "Web / Mobile / Blockchain", compact: true },
 ];
 
 const aboutStatusBadges = [
@@ -9,22 +9,29 @@ const aboutStatusBadges = [
   { label: "Network", value: "Remote-friendly collaboration", marker: "⟫" },
 ];
 
-const aboutLogCards = [
+const aboutSummary =
+  "A dedicated Frontend Developer with over 4 years of experience building websites and mobile applications, complemented by 3 years specializing in blockchain and DApp development. Proficient in modern JavaScript frameworks and blockchain technologies, I am passionate about delivering innovative solutions, enhancing user experiences, and continuously advancing my technical expertise to contribute effectively to team success.";
+
+const aboutSkillCards = [
   {
-    title: "Who I Am",
-    body: "Frontend-focused engineer with four years of experience translating product ideas into polished web interfaces.",
+    title: "Languages",
+    body: "JavaScript, TypeScript.",
   },
   {
-    title: "How I Work",
-    body: "I care about information hierarchy, motion restraint, performance budgets, and components that stay maintainable after handoff.",
+    title: "Frameworks / Library",
+    body: "ReactJS, NextJS, React Native, NestJS, Tailwind CSS, Zustand, React Query, and more.",
   },
   {
-    title: "What I Build",
-    body: "I ship marketing sites, dashboards, internal tools, and web3 surfaces that need clear UX instead of generic templates.",
+    title: "Blockchain",
+    body: "Web3.js, Wagmi, WalletConnect, Remix IDE, and DApp-oriented workflows.",
   },
   {
-    title: "What I Want Next",
-    body: "Join a team that values strong product thinking, close design collaboration, and high standards for implementation detail.",
+    title: "Other",
+    body: "Code splitting, lazy loading, prefetching, preloading.",
+  },
+  {
+    title: "Soft Skills",
+    body: "English conversation.",
   },
 ];
 
@@ -39,20 +46,20 @@ const aboutArchive = [
 
 const aboutTabs = [
   { title: "Beginning", caption: "From markup basics to React product work." },
-  { title: "Logs", caption: "Personal notes, process, and delivery style." },
-  { title: "Achievements", caption: "Interfaces shipped with product impact." },
-  { title: "Creations", caption: "Selected builds across web and web3." },
-  { title: "Next", caption: "Sharper systems, better motion, stronger teams." },
+  { title: "Logs", caption: "Summary, capabilities, and delivery experience." },
+  { title: "Achievements", caption: "Web, mobile, and DApp work across teams." },
+  { title: "Creations", caption: "Frontend systems built with product focus." },
+  { title: "Next", caption: "Keep improving depth, speed, and collaboration." },
 ];
 
 const aboutRewards = [
-  { label: "Systems", value: "+UI" },
-  { label: "Clarity", value: "+DX" },
+  { label: "Frontend", value: "+WEB" },
+  { label: "Blockchain", value: "+DAPP" },
 ];
 
 const aboutControls = [
   { label: "Responsive by default", state: "✓", tone: "positive" },
-  { label: "Design-system mindset", state: "✓", tone: "positive" },
+  { label: "DApp experience", state: "✓", tone: "positive" },
   { label: "Always iterating", state: "⚙", tone: "accent" },
 ];
 
@@ -74,16 +81,16 @@ export function AboutMe() {
 
           <div className="about-dossier__metric">
             <span className="about-dossier__metric-value about-dossier__metric-value--accent">
-              FE
+              03
             </span>
-            <span className="about-dossier__tiny">Frontend Specialist</span>
+            <span className="about-dossier__tiny">Years Blockchain / DApp</span>
           </div>
         </div>
 
         <div className="about-dossier__signals">
           <span>Ho Chi Minh City / Vietnam</span>
+          <span>Websites / Mobile Apps / DApps</span>
           <span>Remote-ready workflow</span>
-          <span>Product teams / Startup pace</span>
         </div>
       </header>
 
@@ -141,17 +148,22 @@ export function AboutMe() {
               <h2 className="about-records__title" id="about-dossier-title">
                 Log Entry: About Me / Frontend Track
               </h2>
-              <span className="about-records__date">Date: 2026.03.31</span>
+              <span className="about-records__date">Date: 2026.04.01</span>
             </div>
 
             <p className="about-records__meta">
               Location: Ho Chi Minh City, Vietnam
               <br />
-              Status: Open to frontend and product-facing opportunities
+              Experience: 4+ years frontend, 3 years blockchain / DApp development
             </p>
 
             <div className="about-records__cards">
-              {aboutLogCards.map((card) => (
+              <article className="about-card about-card--summary">
+                <h3 className="about-card__title">Summary</h3>
+                <p>{aboutSummary}</p>
+              </article>
+
+              {aboutSkillCards.map((card) => (
                 <article className="about-card" key={card.title}>
                   <h3 className="about-card__title">{card.title}</h3>
                   <p>{card.body}</p>
@@ -160,7 +172,7 @@ export function AboutMe() {
             </div>
 
             <div className="about-records__preview" aria-hidden="true">
-              <span>Portfolio snapshot loaded</span>
+              <span>Skills matrix loaded</span>
               <span className="about-records__preview-icon" />
             </div>
 
@@ -204,14 +216,15 @@ export function AboutMe() {
 
           <div className="about-sidebar__group">
             <p className="about-sidebar__label">Quest Name</p>
-            <p className="about-sidebar__name">Product-grade UI</p>
+            <p className="about-sidebar__name">Frontend + DApp Builder</p>
           </div>
 
           <div className="about-sidebar__group">
             <p className="about-sidebar__label">Goal</p>
             <p className="about-sidebar__goal">
-              Build interfaces that feel intentional, load fast, stay
-              maintainable, and communicate product value without visual noise.
+              Deliver websites, mobile applications, and DApps with modern
+              JavaScript tooling, strong UX thinking, and reliable team
+              collaboration.
             </p>
           </div>
 

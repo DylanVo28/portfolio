@@ -1157,6 +1157,14 @@ button {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.015);
 }
 
+.about-card--summary {
+  grid-column: 1 / -1;
+  min-height: auto;
+  background:
+    linear-gradient(180deg, rgba(14, 8, 12, 0.96), rgba(5, 5, 9, 0.92)),
+    rgba(3, 3, 6, 0.88);
+}
+
 .about-card__title {
   margin: 0 0 8px;
   color: var(--red);
@@ -1169,11 +1177,19 @@ button {
 .about-card p {
   margin: 0;
   color: #9097a2;
-  text-transform: uppercase;
-  font-size: 0.69rem;
+  text-transform: none;
+  font-size: 0.72rem;
   line-height: 1.65;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   font-family: var(--font-geist-mono), monospace;
+}
+
+.about-card--summary p {
+  color: #dde3ee;
+  font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
 }
 
 .about-records__preview {
