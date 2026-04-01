@@ -1,6 +1,7 @@
 import { AboutMe } from "./components/AboutMe";
 import { Banner } from "./components/Banner";
 import { Experience } from "./components/Experience";
+import { Projects } from "./components/Projects";
 
 export default function Home() {
   return (
@@ -8,6 +9,8 @@ export default function Home() {
       <Banner />
       <AboutMe />
       <Experience />
+        <Projects />
+
     </main>
   );
 }
