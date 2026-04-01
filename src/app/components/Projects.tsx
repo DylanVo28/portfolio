@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ProjectLink = {
   label: string;
@@ -28,6 +28,18 @@ type Project = {
 };
 
 type CarouselDirection = "next" | "prev";
+type CarouselSlot =
+  | "hidden-left"
+  | "left"
+  | "center"
+  | "right"
+  | "hidden-right";
+type CarouselTransition =
+  | {
+      direction: CarouselDirection;
+      phase: "prep" | "animate";
+    }
+  | null;
 
 const projectProfileFields = [
   { label: "Name", value: "Dinh Nguyen" },
@@ -41,6 +53,43 @@ const projectStatusBadges = [
 ];
 
 const projects: Project[] = [
+  {
+    title: "What.swap",
+    image: "/images/what-swap.png",
+    category: "Web3 Trading / Multi-chain App",
+    domain:
+      "Multi-chain token discovery, analytics, and swap execution across EVM, Solana, Sui, and TON",
+    published: "What team · 10 members",
+    description:
+      "What.swap is a multi-chain Web3 application built to help users discover, analyze, and trade crypto tokens across multiple ecosystems with OKX Web3 APIs as the core market and trading data layer.",
+    role:
+      "Integrated OKX Web3 APIs, multi-chain wallet and transaction flows, secure server-side proxy routes, TradingView charting, and the full swap execution flow from quote retrieval to transaction broadcasting.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "TanStack React Query",
+      "Zustand",
+      "Privy",
+      "Wagmi",
+      "viem",
+      "ethers",
+      "Solana Web3.js",
+      "Sui dApp Kit",
+      "TON Connect",
+      "OKX Web3 APIs",
+      "OKX WebSocket",
+      "TradingView Charting Library",
+    ],
+    team: "10 members (What team)",
+    menuLeft: "Search · Ranking · Charts · Swap",
+    menuRight: "Wallet · Quote · Broadcast",
+    heroLabel: "WHAT.SWAP",
+    sideMenu: "Trade · Search · Charts · Tokens",
+    sideHeadingLines: ["What", "Swap"],
+    sideHeadlineLines: ["Multi-chain", "token trading"],
+  },
   {
     title: "Starship",
     image: "/images/starship.png",
@@ -145,16 +194,16 @@ const projects: Project[] = [
 ];
 
 const projectTabs = [
+  { title: "Trading", caption: "What.swap with OKX-powered multi-chain swap flows." },
   { title: "Launchpad", caption: "Starship token-claiming flows for Web3 fundraising." },
   { title: "Identity", caption: "OneID profile and KYC work on Viction." },
   { title: "Mobile", caption: "3 Tốt app for shrimp-farming operations." },
-  { title: "Creations", caption: "4 shipped case files across Web3, mobile, commerce." },
   { title: "Commerce", caption: "Mobifone SSR storefront with dynamic SEO." },
 ];
 
 const projectRewards = [
-  { label: "Projects", value: "+04" },
-  { label: "Domains", value: "+03" },
+  { label: "Projects", value: "+05" },
+  { label: "Domains", value: "+04" },
 ];
 
 const projectControls = [
@@ -163,30 +212,173 @@ const projectControls = [
   { label: "SSR / SEO", state: "⚙", tone: "accent" },
 ];
 
+const CAROUSEL_TRANSITION_MS = 460;
+
+function getWrappedIndex(index: number) {
+  return (index + projects.length) % projects.length;
+}
+
 export function Projects() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [carouselDirection, setCarouselDirection] =
-    useState<CarouselDirection>("next");
+  const [carouselTransition, setCarouselTransition] =
+    useState<CarouselTransition>(null);
 
   const activeProject = projects[activeProjectIndex];
-  const leftProject =
-    projects[(activeProjectIndex - 1 + projects.length) % projects.length];
-  const rightProject = projects[(activeProjectIndex + 1) % projects.length];
+  const leftProject = projects[getWrappedIndex(activeProjectIndex - 1)];
+  const rightProject = projects[getWrappedIndex(activeProjectIndex + 1)];
   const progressWidth = `${((activeProjectIndex + 1) / projects.length) * 100}%`;
-  const carouselMotionClass = `projects-motion--${carouselDirection}`;
-  const transitionKey = `${carouselDirection}-${activeProjectIndex}`;
+  const isCarouselAnimating = carouselTransition !== null;
+
+  useEffect(() => {
+    if (carouselTransition?.phase !== "prep") {
+      return undefined;
+    }
+
+    const animationFrameId = window.requestAnimationFrame(() => {
+      setCarouselTransition((currentTransition) =>
+        currentTransition
+          ? { direction: currentTransition.direction, phase: "animate" }
+          : null,
+      );
+    });
+
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [carouselTransition]);
+
+  useEffect(() => {
+    if (carouselTransition?.phase !== "animate") {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setActiveProjectIndex((currentIndex) =>
+        carouselTransition.direction === "next"
+          ? getWrappedIndex(currentIndex + 1)
+          : getWrappedIndex(currentIndex - 1),
+      );
+      setCarouselTransition(null);
+    }, CAROUSEL_TRANSITION_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [carouselTransition]);
 
   const showPreviousProject = () => {
-    setCarouselDirection("prev");
-    setActiveProjectIndex((currentIndex) =>
-      (currentIndex - 1 + projects.length) % projects.length,
-    );
+    if (isCarouselAnimating) {
+      return;
+    }
+
+    setCarouselTransition({ direction: "prev", phase: "prep" });
   };
 
   const showNextProject = () => {
-    setCarouselDirection("next");
-    setActiveProjectIndex((currentIndex) => (currentIndex + 1) % projects.length);
+    if (isCarouselAnimating) {
+      return;
+    }
+
+    setCarouselTransition({ direction: "next", phase: "prep" });
   };
+
+  const getCarouselCards = () => {
+    const beforeLeftProject = projects[getWrappedIndex(activeProjectIndex - 2)];
+    const afterRightProject = projects[getWrappedIndex(activeProjectIndex + 2)];
+
+    if (!carouselTransition) {
+      return [
+        { project: leftProject, slot: "left" as CarouselSlot },
+        { project: activeProject, slot: "center" as CarouselSlot },
+        { project: rightProject, slot: "right" as CarouselSlot },
+      ];
+    }
+
+    if (carouselTransition.direction === "next") {
+      if (carouselTransition.phase === "prep") {
+        return [
+          { project: leftProject, slot: "left" as CarouselSlot },
+          { project: activeProject, slot: "center" as CarouselSlot },
+          { project: rightProject, slot: "right" as CarouselSlot },
+          { project: afterRightProject, slot: "hidden-right" as CarouselSlot },
+        ];
+      }
+
+      return [
+        { project: leftProject, slot: "hidden-left" as CarouselSlot },
+        { project: activeProject, slot: "left" as CarouselSlot },
+        { project: rightProject, slot: "center" as CarouselSlot },
+        { project: afterRightProject, slot: "right" as CarouselSlot },
+      ];
+    }
+
+    if (carouselTransition.phase === "prep") {
+      return [
+        { project: beforeLeftProject, slot: "hidden-left" as CarouselSlot },
+        { project: leftProject, slot: "left" as CarouselSlot },
+        { project: activeProject, slot: "center" as CarouselSlot },
+        { project: rightProject, slot: "right" as CarouselSlot },
+      ];
+    }
+
+    return [
+      { project: beforeLeftProject, slot: "left" as CarouselSlot },
+      { project: leftProject, slot: "center" as CarouselSlot },
+      { project: activeProject, slot: "right" as CarouselSlot },
+      { project: rightProject, slot: "hidden-right" as CarouselSlot },
+    ];
+  };
+
+  const renderCarouselCard = (project: Project, slot: CarouselSlot) => {
+    const sideLines = project.sideHeadingLines ?? project.sideHeadlineLines ?? [];
+
+    return (
+      <article
+        className={`project-card-3d project-card-3d--slot-${slot}`}
+        key={project.title}
+      >
+        <p className="project-card__published-label">{project.published}</p>
+
+        <div className="project-card__media-frame">
+          <Image
+            alt={`${project.title} preview`}
+            className="project-card__image"
+            fill
+            priority={slot === "center" && activeProjectIndex === 0}
+            sizes="(max-width: 820px) 100vw, 370px"
+            src={project.image}
+          />
+          <div className="project-card__image-overlay" aria-hidden="true" />
+
+          <div className="project-card__top-menu">
+            <span>{project.menuLeft}</span>
+            <span>{project.menuRight}</span>
+          </div>
+
+          {/*<p className="project-card__headline">{project.heroLabel}</p>*/}
+          <p className="project-card__side-menu">{project.sideMenu}</p>
+
+          <p className="project-card__side-title">
+            {sideLines.map((line) => (
+              <span key={`${project.title}-${line}`}>{line}</span>
+            ))}
+          </p>
+
+          {/*<div className="project-card__bottom-strip" aria-hidden="true">*/}
+          {/*  <div className="project-card__strip project-card__strip--route" />*/}
+          {/*  <div className="project-card__strip project-card__strip--surface" />*/}
+          {/*  <div className="project-card__strip project-card__strip--accent" />*/}
+          {/*  <div className="project-card__strip project-card__strip--light" />*/}
+          {/*</div>*/}
+        </div>
+
+        <p className="project-card__action">Case File</p>
+
+        <p className="project-card__caption">
+          {project.title}
+          <small>{project.category}</small>
+        </p>
+      </article>
+    );
+  };
+
+  const carouselCards = getCarouselCards();
 
   return (
     <section className="projects-dossier" aria-labelledby="projects-dossier-title">
@@ -195,7 +387,7 @@ export function Projects() {
       <header className="projects-dossier__topbar">
         <div className="projects-dossier__metrics">
           <div className="projects-dossier__metric">
-            <span className="projects-dossier__metric-value">04</span>
+            <span className="projects-dossier__metric-value">05</span>
             <span className="projects-dossier__tiny">Selected Builds</span>
           </div>
 
@@ -213,7 +405,7 @@ export function Projects() {
 
         <div className="projects-dossier__signals">
           <span>Web3 DApps / mobile apps / SSR commerce</span>
-          <span>Coin98 / outsource / PVS delivery track</span>
+          <span>What / Coin98 / outsource / PVS delivery track</span>
           <span>Updated: 2026.04.01</span>
         </div>
       </header>
@@ -263,124 +455,25 @@ export function Projects() {
 
         <section className="projects-main" aria-labelledby="projects-dossier-title">
           <div className="projects-main__inner">
-            <p className="projects-main__page-title">Creations</p>
+            <p className="projects-main__page-title">Projects</p>
 
             <div className="projects-carousel" aria-label="Selected project previews">
               <button
                 className="projects-carousel__arrow projects-carousel__arrow--left"
                 aria-label="Show previous project"
+                disabled={isCarouselAnimating}
                 onClick={showPreviousProject}
                 type="button"
               >
                 ‹
               </button>
 
-              <article
-                className={`project-card-3d project-card-3d--left ${carouselMotionClass}`}
-                key={`left-${transitionKey}-${leftProject.title}`}
-              >
-                <p className="project-card__side-published">{leftProject.published}</p>
-
-                <div className="project-card__media-frame project-card__media-frame--side">
-                  <Image
-                    alt={`${leftProject.title} preview`}
-                    className="project-card__image"
-                    fill
-                    sizes="170px"
-                    src={leftProject.image}
-                  />
-                  <div
-                    className="project-card__image-overlay project-card__image-overlay--side"
-                    aria-hidden="true"
-                  />
-                  <p className="project-card__side-menu">{leftProject.sideMenu}</p>
-                  <p className="project-card__side-heading">
-                    {leftProject.sideHeadingLines?.map((line) => (
-                      <span key={line}>{line}</span>
-                    ))}
-                  </p>
-                </div>
-
-                <p className="project-card__side-btn">Case File</p>
-
-                <p className="project-card__side-caption">
-                  {leftProject.title}
-                  <small>{leftProject.category}</small>
-                </p>
-              </article>
-
-              <article
-                className={`project-card-3d project-card-3d--center ${carouselMotionClass}`}
-                key={`center-${transitionKey}-${activeProject.title}`}
-              >
-                <p className="project-card__published">{activeProject.published}</p>
-
-                <div className="project-card__media-frame project-card__media-frame--center">
-                  <Image
-                    alt={`${activeProject.title} preview`}
-                    className="project-card__image"
-                    fill
-                    priority={activeProjectIndex === 0}
-                    sizes="370px"
-                    src={activeProject.image}
-                  />
-                  <div
-                    className="project-card__image-overlay project-card__image-overlay--center"
-                    aria-hidden="true"
-                  />
-                  <div className="project-card__top-menu">
-                    <span>{activeProject.menuLeft}</span>
-                    <span>{activeProject.menuRight}</span>
-                  </div>
-                  {/*<p className="project-card__headline">{activeProject.heroLabel}</p>*/}
-
-                  {/*<div className="project-card__bottom-strip" aria-hidden="true">*/}
-                  {/*  <div className="project-card__strip project-card__strip--route" />*/}
-                  {/*  <div className="project-card__strip project-card__strip--surface" />*/}
-                  {/*  <div className="project-card__strip project-card__strip--accent" />*/}
-                  {/*  <div className="project-card__strip project-card__strip--light" />*/}
-                  {/*</div>*/}
-                </div>
-
-                <p className="project-card__view-live">Case File</p>
-              </article>
-
-              <article
-                className={`project-card-3d project-card-3d--right ${carouselMotionClass}`}
-                key={`right-${transitionKey}-${rightProject.title}`}
-              >
-                <p className="project-card__side-published">{rightProject.published}</p>
-
-                <div className="project-card__media-frame project-card__media-frame--side">
-                  <Image
-                    alt={`${rightProject.title} preview`}
-                    className="project-card__image"
-                    fill
-                    sizes="170px"
-                    src={rightProject.image}
-                  />
-                  <div
-                    className="project-card__image-overlay project-card__image-overlay--side"
-                    aria-hidden="true"
-                  />
-                  <p className="project-card__right-headline">
-                    {rightProject.sideHeadlineLines?.map((line) => (
-                      <span key={line}>{line}</span>
-                    ))}
-                  </p>
-                </div>
-
-                <p className="project-card__side-btn">Case File</p>
-
-                <p className="project-card__side-caption">
-                  {rightProject.title}
-                  <small>{rightProject.category}</small>
-                </p>
-              </article>
+              {carouselCards.map(({ project, slot }) => renderCarouselCard(project, slot))}
 
               <button
                 className="projects-carousel__arrow projects-carousel__arrow--right"
                 aria-label="Show next project"
+                disabled={isCarouselAnimating}
                 onClick={showNextProject}
                 type="button"
               >
@@ -388,10 +481,7 @@ export function Projects() {
               </button>
             </div>
 
-            <div
-              className={`projects-copy ${carouselMotionClass}`}
-              key={`copy-${transitionKey}-${activeProject.title}`}
-            >
+            <div className="projects-copy">
               <h2 className="projects-copy__title" id="projects-dossier-title">
                 {activeProject.title}
               </h2>
@@ -417,10 +507,7 @@ export function Projects() {
               </div>
             </div>
 
-            <div
-              className={`projects-progress ${carouselMotionClass}`}
-              key={`progress-${transitionKey}-${activeProject.title}`}
-            >
+            <div className="projects-progress">
               <div className="projects-progress__line">
                 <div
                   className="projects-progress__fill"
@@ -491,7 +578,7 @@ export function Projects() {
             {projectTabs.map((tab, index) => (
               <article
                 className={
-                  index === 3 ? "project-tab project-tab--active" : "project-tab"
+                  index === 0 ? "project-tab project-tab--active" : "project-tab"
                 }
                 key={tab.title}
               >
@@ -509,10 +596,7 @@ export function Projects() {
           </p>
           <p className="projects-sidebar__subtitle">Selected Frontend Work</p>
 
-          <div
-            className={`projects-sidebar__content ${carouselMotionClass}`}
-            key={`sidebar-${transitionKey}-${activeProject.title}`}
-          >
+          <div className="projects-sidebar__content">
             <div className="projects-sidebar__group">
               <p className="projects-sidebar__label">Quest Name</p>
               <p className="projects-sidebar__name">{activeProject.title}</p>
