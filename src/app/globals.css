@@ -2702,6 +2702,114 @@ button {
   filter: brightness(0.9);
 }
 
+.project-card-3d--left.projects-motion--next {
+  animation: project-card-left-next 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.project-card-3d--center.projects-motion--next {
+  animation: project-card-center-next 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.project-card-3d--right.projects-motion--next {
+  animation: project-card-right-next 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.project-card-3d--left.projects-motion--prev {
+  animation: project-card-left-prev 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.project-card-3d--center.projects-motion--prev {
+  animation: project-card-center-prev 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.project-card-3d--right.projects-motion--prev {
+  animation: project-card-right-prev 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes project-card-left-next {
+  from {
+    opacity: 0;
+    filter: brightness(0.7) blur(2px);
+    transform: translateX(72px) perspective(900px) rotateY(48deg) rotateZ(-1deg) scale(0.96);
+  }
+
+  to {
+    opacity: 0.8;
+    filter: brightness(0.9) blur(0);
+    transform: perspective(900px) rotateY(48deg) rotateZ(-1deg);
+  }
+}
+
+@keyframes project-card-center-next {
+  from {
+    opacity: 0.3;
+    filter: brightness(0.8) blur(3px);
+    transform: translateX(108px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes project-card-right-next {
+  from {
+    opacity: 0;
+    filter: brightness(0.6) blur(3px);
+    transform: translateX(164px) perspective(900px) rotateY(-48deg) rotateZ(1deg) scale(0.92);
+  }
+
+  to {
+    opacity: 0.8;
+    filter: brightness(0.9) blur(0);
+    transform: perspective(900px) rotateY(-48deg) rotateZ(1deg);
+  }
+}
+
+@keyframes project-card-left-prev {
+  from {
+    opacity: 0;
+    filter: brightness(0.6) blur(3px);
+    transform: translateX(-164px) perspective(900px) rotateY(48deg) rotateZ(-1deg) scale(0.92);
+  }
+
+  to {
+    opacity: 0.8;
+    filter: brightness(0.9) blur(0);
+    transform: perspective(900px) rotateY(48deg) rotateZ(-1deg);
+  }
+}
+
+@keyframes project-card-center-prev {
+  from {
+    opacity: 0.3;
+    filter: brightness(0.8) blur(3px);
+    transform: translateX(-108px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes project-card-right-prev {
+  from {
+    opacity: 0;
+    filter: brightness(0.7) blur(2px);
+    transform: translateX(-72px) perspective(900px) rotateY(-48deg) rotateZ(1deg) scale(0.96);
+  }
+
+  to {
+    opacity: 0.8;
+    filter: brightness(0.9) blur(0);
+    transform: perspective(900px) rotateY(-48deg) rotateZ(1deg);
+  }
+}
+
 .project-card__published,
 .project-card__side-published {
   position: absolute;
@@ -2976,6 +3084,38 @@ button {
   transform: translateX(2px);
 }
 
+.projects-copy.projects-motion--next {
+  animation: project-copy-next 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.projects-copy.projects-motion--prev {
+  animation: project-copy-prev 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes project-copy-next {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+}
+
+@keyframes project-copy-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+}
+
 .projects-copy__title {
   display: flex;
   align-items: center;
@@ -3166,6 +3306,38 @@ button {
   margin-bottom: 10px;
 }
 
+.projects-progress.projects-motion--next {
+  animation: project-progress-next 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.projects-progress.projects-motion--prev {
+  animation: project-progress-prev 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes project-progress-next {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes project-progress-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .projects-progress__line {
   position: relative;
   height: 8px;
@@ -3332,6 +3504,43 @@ button {
   letter-spacing: 0.08em;
 }
 
+.projects-sidebar__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-sidebar__content.projects-motion--next {
+  animation: project-sidebar-next 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.projects-sidebar__content.projects-motion--prev {
+  animation: project-sidebar-prev 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes project-sidebar-next {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes project-sidebar-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @media (max-width: 1180px) {
   .projects-dossier__layout {
     grid-template-areas:
@@ -3413,6 +3622,15 @@ button {
     height: 360px;
   }
 
+  .project-card-3d--left.projects-motion--next,
+  .project-card-3d--center.projects-motion--next,
+  .project-card-3d--right.projects-motion--next,
+  .project-card-3d--left.projects-motion--prev,
+  .project-card-3d--center.projects-motion--prev,
+  .project-card-3d--right.projects-motion--prev {
+    animation: project-card-mobile-fade 320ms ease both;
+  }
+
   .project-card__media-frame--center {
     top: 72px;
     height: 200px;
@@ -3457,8 +3675,35 @@ button {
   }
 }
 
+@keyframes project-card-mobile-fade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .projects-dossier__scanline {
+    animation: none;
+  }
+
+  .project-card-3d--left.projects-motion--next,
+  .project-card-3d--center.projects-motion--next,
+  .project-card-3d--right.projects-motion--next,
+  .project-card-3d--left.projects-motion--prev,
+  .project-card-3d--center.projects-motion--prev,
+  .project-card-3d--right.projects-motion--prev,
+  .projects-copy.projects-motion--next,
+  .projects-copy.projects-motion--prev,
+  .projects-progress.projects-motion--next,
+  .projects-progress.projects-motion--prev,
+  .projects-sidebar__content.projects-motion--next,
+  .projects-sidebar__content.projects-motion--prev {
     animation: none;
   }
 }

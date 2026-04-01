@@ -27,6 +27,8 @@ type Project = {
   links?: ProjectLink[];
 };
 
+type CarouselDirection = "next" | "prev";
+
 const projectProfileFields = [
   { label: "Name", value: "Dinh Nguyen" },
   { label: "Role", value: "Frontend Developer" },
@@ -163,20 +165,26 @@ const projectControls = [
 
 export function Projects() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] =
+    useState<CarouselDirection>("next");
 
   const activeProject = projects[activeProjectIndex];
   const leftProject =
     projects[(activeProjectIndex - 1 + projects.length) % projects.length];
   const rightProject = projects[(activeProjectIndex + 1) % projects.length];
   const progressWidth = `${((activeProjectIndex + 1) / projects.length) * 100}%`;
+  const carouselMotionClass = `projects-motion--${carouselDirection}`;
+  const transitionKey = `${carouselDirection}-${activeProjectIndex}`;
 
   const showPreviousProject = () => {
+    setCarouselDirection("prev");
     setActiveProjectIndex((currentIndex) =>
       (currentIndex - 1 + projects.length) % projects.length,
     );
   };
 
   const showNextProject = () => {
+    setCarouselDirection("next");
     setActiveProjectIndex((currentIndex) => (currentIndex + 1) % projects.length);
   };
 
@@ -267,7 +275,10 @@ export function Projects() {
                 ‹
               </button>
 
-              <article className="project-card-3d project-card-3d--left">
+              <article
+                className={`project-card-3d project-card-3d--left ${carouselMotionClass}`}
+                key={`left-${transitionKey}-${leftProject.title}`}
+              >
                 <p className="project-card__side-published">{leftProject.published}</p>
 
                 <div className="project-card__media-frame project-card__media-frame--side">
@@ -298,7 +309,10 @@ export function Projects() {
                 </p>
               </article>
 
-              <article className="project-card-3d project-card-3d--center">
+              <article
+                className={`project-card-3d project-card-3d--center ${carouselMotionClass}`}
+                key={`center-${transitionKey}-${activeProject.title}`}
+              >
                 <p className="project-card__published">{activeProject.published}</p>
 
                 <div className="project-card__media-frame project-card__media-frame--center">
@@ -331,7 +345,10 @@ export function Projects() {
                 <p className="project-card__view-live">Case File</p>
               </article>
 
-              <article className="project-card-3d project-card-3d--right">
+              <article
+                className={`project-card-3d project-card-3d--right ${carouselMotionClass}`}
+                key={`right-${transitionKey}-${rightProject.title}`}
+              >
                 <p className="project-card__side-published">{rightProject.published}</p>
 
                 <div className="project-card__media-frame project-card__media-frame--side">
@@ -371,7 +388,10 @@ export function Projects() {
               </button>
             </div>
 
-            <div className="projects-copy">
+            <div
+              className={`projects-copy ${carouselMotionClass}`}
+              key={`copy-${transitionKey}-${activeProject.title}`}
+            >
               <h2 className="projects-copy__title" id="projects-dossier-title">
                 {activeProject.title}
               </h2>
@@ -397,7 +417,10 @@ export function Projects() {
               </div>
             </div>
 
-            <div className="projects-progress">
+            <div
+              className={`projects-progress ${carouselMotionClass}`}
+              key={`progress-${transitionKey}-${activeProject.title}`}
+            >
               <div className="projects-progress__line">
                 <div
                   className="projects-progress__fill"
@@ -486,36 +509,41 @@ export function Projects() {
           </p>
           <p className="projects-sidebar__subtitle">Selected Frontend Work</p>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Quest Name</p>
-            <p className="projects-sidebar__name">{activeProject.title}</p>
-          </div>
+          <div
+            className={`projects-sidebar__content ${carouselMotionClass}`}
+            key={`sidebar-${transitionKey}-${activeProject.title}`}
+          >
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Quest Name</p>
+              <p className="projects-sidebar__name">{activeProject.title}</p>
+            </div>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Domain</p>
-            <p className="projects-sidebar__text">{activeProject.domain}</p>
-          </div>
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Domain</p>
+              <p className="projects-sidebar__text">{activeProject.domain}</p>
+            </div>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Project Summary</p>
-            <p className="projects-sidebar__goal">{activeProject.description}</p>
-          </div>
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Project Summary</p>
+              <p className="projects-sidebar__goal">{activeProject.description}</p>
+            </div>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Role</p>
-            <p className="projects-sidebar__text">{activeProject.role}</p>
-          </div>
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Role</p>
+              <p className="projects-sidebar__text">{activeProject.role}</p>
+            </div>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Tech Stack</p>
-            <p className="projects-sidebar__text">
-              {activeProject.technologies.join(", ")}
-            </p>
-          </div>
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Tech Stack</p>
+              <p className="projects-sidebar__text">
+                {activeProject.technologies.join(", ")}
+              </p>
+            </div>
 
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Team Size</p>
-            <p className="projects-sidebar__text">{activeProject.team}</p>
+            <div className="projects-sidebar__group">
+              <p className="projects-sidebar__label">Team Size</p>
+              <p className="projects-sidebar__text">{activeProject.team}</p>
+            </div>
           </div>
 
           <div className="projects-sidebar__group">
