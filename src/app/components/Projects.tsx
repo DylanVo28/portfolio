@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 type ProjectLink = {
@@ -9,6 +10,7 @@ type ProjectLink = {
 
 type Project = {
   title: string;
+  image: string;
   category: string;
   domain: string;
   published: string;
@@ -39,6 +41,7 @@ const projectStatusBadges = [
 const projects: Project[] = [
   {
     title: "Starship",
+    image: "/images/starship.png",
     category: "DApp Blockchain / Multichain Launchpad",
     domain: "Web3 launchpad connecting startups with investors",
     published: "Coin98 team · 10 members",
@@ -65,6 +68,7 @@ const projects: Project[] = [
   },
   {
     title: "OneID",
+    image: "/images/oneid.png",
     category: "DApp Blockchain / Digital Identity",
     domain: "Multi-chain identity solution on Viction blockchain",
     published: "Coin98 team · 10 members",
@@ -90,6 +94,7 @@ const projects: Project[] = [
   },
   {
     title: "3 Tốt",
+    image: "/images/3tot.png",
     category: "Mobile App / AgriTech",
     domain: "Smart shrimp-farming optimization app",
     published: "Outsource team · 8 members",
@@ -118,6 +123,7 @@ const projects: Project[] = [
   },
   {
     title: "Mobifone",
+    image: "/images/mobifone.png",
     category: "Ecommerce / Store Website",
     domain: "SSR commerce platform with dynamic SEO",
     published: "PVS team · 10 members",
@@ -264,8 +270,18 @@ export function Projects() {
               <article className="project-card-3d project-card-3d--left">
                 <p className="project-card__side-published">{leftProject.published}</p>
 
-                <div className="project-card__side-screen project-card__side-screen--launchpad">
-                  <div className="project-card__launchpad-glow" aria-hidden="true" />
+                <div className="project-card__media-frame project-card__media-frame--side">
+                  <Image
+                    alt={`${leftProject.title} preview`}
+                    className="project-card__image"
+                    fill
+                    sizes="170px"
+                    src={leftProject.image}
+                  />
+                  <div
+                    className="project-card__image-overlay project-card__image-overlay--side"
+                    aria-hidden="true"
+                  />
                   <p className="project-card__side-menu">{leftProject.sideMenu}</p>
                   <p className="project-card__side-heading">
                     {leftProject.sideHeadingLines?.map((line) => (
@@ -285,23 +301,31 @@ export function Projects() {
               <article className="project-card-3d project-card-3d--center">
                 <p className="project-card__published">{activeProject.published}</p>
 
-                <div className="project-card__mockup">
+                <div className="project-card__media-frame project-card__media-frame--center">
+                  <Image
+                    alt={`${activeProject.title} preview`}
+                    className="project-card__image"
+                    fill
+                    priority={activeProjectIndex === 0}
+                    sizes="370px"
+                    src={activeProject.image}
+                  />
                   <div
-                    className="project-card__hero project-card__hero--swap"
+                    className="project-card__image-overlay project-card__image-overlay--center"
                     aria-hidden="true"
                   />
                   <div className="project-card__top-menu">
                     <span>{activeProject.menuLeft}</span>
                     <span>{activeProject.menuRight}</span>
                   </div>
-                  <p className="project-card__headline">{activeProject.heroLabel}</p>
+                  {/*<p className="project-card__headline">{activeProject.heroLabel}</p>*/}
 
-                  <div className="project-card__bottom-strip" aria-hidden="true">
-                    <div className="project-card__strip project-card__strip--route" />
-                    <div className="project-card__strip project-card__strip--surface" />
-                    <div className="project-card__strip project-card__strip--accent" />
-                    <div className="project-card__strip project-card__strip--light" />
-                  </div>
+                  {/*<div className="project-card__bottom-strip" aria-hidden="true">*/}
+                  {/*  <div className="project-card__strip project-card__strip--route" />*/}
+                  {/*  <div className="project-card__strip project-card__strip--surface" />*/}
+                  {/*  <div className="project-card__strip project-card__strip--accent" />*/}
+                  {/*  <div className="project-card__strip project-card__strip--light" />*/}
+                  {/*</div>*/}
                 </div>
 
                 <p className="project-card__view-live">Case File</p>
@@ -310,14 +334,23 @@ export function Projects() {
               <article className="project-card-3d project-card-3d--right">
                 <p className="project-card__side-published">{rightProject.published}</p>
 
-                <div className="project-card__side-screen project-card__side-screen--portfolio">
-                  <div className="project-card__portfolio-orb" aria-hidden="true" />
+                <div className="project-card__media-frame project-card__media-frame--side">
+                  <Image
+                    alt={`${rightProject.title} preview`}
+                    className="project-card__image"
+                    fill
+                    sizes="170px"
+                    src={rightProject.image}
+                  />
+                  <div
+                    className="project-card__image-overlay project-card__image-overlay--side"
+                    aria-hidden="true"
+                  />
                   <p className="project-card__right-headline">
                     {rightProject.sideHeadlineLines?.map((line) => (
                       <span key={line}>{line}</span>
                     ))}
                   </p>
-                  <div className="project-card__photo-block" aria-hidden="true" />
                 </div>
 
                 <p className="project-card__side-btn">Case File</p>
