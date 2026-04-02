@@ -5,7 +5,7 @@ const aboutProfileFields = [
 ];
 
 const aboutStatusBadges = [
-  { label: "Availability", value: "Open for frontend roles", marker: "◁" },
+  { label: "Availability", value: "#OPENTOWORK", marker: "◁" },
   { label: "Network", value: "Remote-friendly collaboration", marker: "⟫" },
 ];
 
@@ -97,7 +97,7 @@ export function AboutMe() {
       <div className="about-dossier__layout">
         <aside className="about-panel about-profile">
           <div className="about-profile__avatar" aria-hidden="true">
-            <span className="about-profile__avatar-tag">DN</span>
+            <span className="about-profile__avatar-tag">DYLAN</span>
           </div>
 
           {aboutProfileFields.map((field) => (

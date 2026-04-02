@@ -32,36 +32,18 @@ export function Banner() {
     <section className="cyber-banner" aria-label="Portfolio hero banner">
       <div className="cyber-banner__scanline" aria-hidden="true" />
 
-      <header className="cyber-banner__topbar">
-        <div className="topbar-metrics">
-          <div className="topbar-metric">
-            <span className="topbar-metric__value">04</span>
-            <span className="topbar__tiny">Years Experience</span>
-          </div>
 
-          <div className="plus-box" aria-hidden="true">
-            +
-          </div>
-
-          <div className="topbar-metric">
-            <span className="topbar-metric__value topbar-metric__value--accent">
-              FE
-            </span>
-            <span className="topbar__tiny">Frontend Focus</span>
-          </div>
-        </div>
-
-        <div className="topbar-flags">
-          <span>Frontend Developer</span>
-          <span>Based in Vietnam / Remote</span>
-          <span>Open to Product Teams</span>
-        </div>
-      </header>
 
       <div className="cyber-banner__layout">
         <aside className="cyber-panel profile-panel">
-          <div className="profile-panel__portrait" aria-hidden="true">
-            <span className="profile-panel__portrait-tag">DN</span>
+          <div className="profile-panel__portrait">
+            <Image
+              alt="Portrait of Dinh Vo"
+              className="profile-panel__portrait-image"
+              fill
+              sizes="(max-width: 820px) 100vw, (max-width: 1180px) 50vw, 280px"
+              src="/images/avatar.png"
+            />
           </div>
 
           {profileFields.map((field) => (
@@ -81,11 +63,11 @@ export function Banner() {
 
           <div className="profile-panel__field">
             <p className="profile-panel__label">Availability</p>
-            <p className="cyber-badge">Open For Frontend Roles</p>
+            <p className="cyber-badge">#OPENTOWORK</p>
           </div>
 
           <div className="profile-panel__field">
-            <p className="profile-panel__label">Signal</p>
+            <p className="profile-panel__label">FRAMEWORKS</p>
             <p className="cyber-badge">
               React / Next.js / UI Systems
               <span aria-hidden="true">»</span>
@@ -120,9 +102,7 @@ export function Banner() {
               ))}
             </div>
 
-            <span className="hero-panel__sub">
-              Frontend portfolio / selected work / react and next.js
-            </span>
+
           </div>
 
           <div className="hero-panel__art" aria-hidden="true">
@@ -154,7 +134,7 @@ export function Banner() {
 
         <aside className="cyber-panel mission-panel">
           <p className="mission-panel__title">Current Focus</p>
-          <p className="mission-panel__subtitle">Frontend Portfolio System</p>
+          <p className="mission-panel__subtitle">To become fullstack developer</p>
 
           <div className="mission-panel__group">
             <p className="mission-panel__label">Focus Area</p>

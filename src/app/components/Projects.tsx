@@ -48,7 +48,7 @@ const projectProfileFields = [
 ];
 
 const projectStatusBadges = [
-  { label: "Availability", value: "Open for frontend roles", marker: "◁" },
+  { label: "Availability", value: "#OPENTOWORK", marker: "◁" },
   { label: "Signal", value: "Web3 / mobile / eCommerce delivery", marker: "⟫" },
 ];
 
