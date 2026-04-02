@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const profileFields = [
   { label: "Name", value: "DINH VO", compact: true },
   { label: "Role", value: "Frontend Developer" },
@@ -16,15 +14,35 @@ const tabs = [
   { title: "Contact", caption: "Available for teams building thoughtful web apps." },
 ];
 
-const rewards = [
-  { label: "UI", value: "+UX" },
-  { label: "Perf", value: "+DX" },
-];
-
-const controls = [
-  { label: "Responsive UI", state: "✓", tone: "positive" },
-  { label: "Accessibility", state: "✓", tone: "positive" },
-  { label: "Motion Detail", state: "⚙", tone: "accent" },
+const contactItems = [
+  {
+    label: "Phone",
+    links: [{ href: "tel:+84392857487", text: "+84 392 857 487" }],
+  },
+  {
+    label: "Email",
+    links: [{ href: "mailto:kedinhvo2000@gmail.com", text: "kedinhvo2000@gmail.com" }],
+  },
+  {
+    label: "LinkedIn",
+    links: [
+      {
+        href: "https://www.linkedin.com/in/dinh-vo-a81835139/",
+        text: "linkedin.com/in/dinh-vo-a81835139",
+      },
+    ],
+  },
+  {
+    label: "GitHub",
+    links: [
+      { href: "https://github.com/dinhvdk", text: "github.com/dinhvdk" },
+      { href: "https://github.com/DylanVo28", text: "github.com/DylanVo28" },
+    ],
+  },
+  {
+    label: "My Website",
+    links: [{ href: "https://dinhvdk.vercel.app/about", text: "dinhvdk.vercel.app/about" }],
+  },
 ];
 
 export function Banner() {
@@ -37,13 +55,18 @@ export function Banner() {
       <div className="cyber-banner__layout">
         <aside className="cyber-panel profile-panel">
           <div className="profile-panel__portrait">
-            <Image
-              alt="Portrait of Dinh Vo"
-              className="profile-panel__portrait-image"
-              fill
-              sizes="(max-width: 820px) 100vw, (max-width: 1180px) 50vw, 280px"
-              src="/images/avatar.png"
-            />
+            <video
+              aria-hidden="true"
+              autoPlay
+              className="profile-panel__portrait-media"
+              loop
+              muted
+              playsInline
+              poster="/images/avatar.png"
+              preload="metadata"
+            >
+              <source src="/media/avatar.mp4" type="video/mp4" />
+            </video>
           </div>
 
           {profileFields.map((field) => (
@@ -107,14 +130,18 @@ export function Banner() {
 
           <div className="hero-panel__art" aria-hidden="true">
             <div className="hero-panel__image-frame">
-              <Image
-                alt=""
-                className="hero-panel__image"
-                fill
-                priority
-                sizes="(max-width: 820px) 100vw, (max-width: 1180px) 80vw, 60vw"
-                src="/images/banner.png"
-              />
+              <video
+                aria-hidden="true"
+                autoPlay
+                className="hero-panel__media"
+                loop
+                muted
+                playsInline
+                poster="/images/banner.png"
+                preload="metadata"
+              >
+                <source src="/media/banner.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
 
@@ -132,44 +159,28 @@ export function Banner() {
           </nav>
         </section>
 
-        <aside className="cyber-panel mission-panel">
-          <p className="mission-panel__title">Current Focus</p>
-          <p className="mission-panel__subtitle">To become fullstack developer</p>
+        <aside className="cyber-panel contact-panel">
+          <p className="contact-panel__title">Contact</p>
+          <p className="contact-panel__subtitle">Direct channels and public profiles</p>
 
-          <div className="mission-panel__group">
-            <p className="mission-panel__label">Focus Area</p>
-            <p className="mission-panel__name">Frontend Portfolio</p>
-          </div>
+          <div className="contact-panel__list">
+            {contactItems.map((item) => (
+              <div className="contact-panel__item" key={item.label}>
+                <p className="contact-panel__label">{item.label}</p>
 
-          <div className="mission-panel__group">
-            <p className="mission-panel__label">Goal</p>
-            <p className="mission-panel__goal">
-              Present 4 years of frontend experience through clear positioning,
-              selected projects, and a strong visual identity that feels
-              product-ready.
-            </p>
-          </div>
-
-          <div className="mission-panel__group">
-            <p className="mission-panel__label">Rewards</p>
-            <div className="mission-panel__rewards">
-              {rewards.map((reward) => (
-                <div className="reward-card" key={reward.label}>
-                  <div className="reward-card__icon" aria-hidden="true" />
-                  <span className="reward-card__value">{reward.value}</span>
-                  <span className="reward-card__label">{reward.label}</span>
+                <div className="contact-panel__links">
+                  {item.links.map((link) => (
+                    <a
+                      className="contact-panel__link"
+                      href={link.href}
+                      key={link.href}
+                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                    >
+                      {link.text}
+                    </a>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mission-panel__controls">
-            {controls.map((control) => (
-              <div className="control-row" key={control.label}>
-                <span>{control.label}</span>
-                <span className={`control-pill control-pill--${control.tone}`}>
-                  {control.state}
-                </span>
               </div>
             ))}
           </div>
