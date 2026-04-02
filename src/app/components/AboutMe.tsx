@@ -1,5 +1,5 @@
 const aboutProfileFields = [
-  { label: "Name", value: "Dinh Nguyen" },
+  { label: "Name", value: "DINH VO" },
   { label: "Occupation", value: "Frontend Developer" },
   { label: "Focus", value: "Web / Mobile / Blockchain", compact: true },
 ];
@@ -176,18 +176,7 @@ export function AboutMe() {
               <span className="about-records__preview-icon" />
             </div>
 
-            <div className="about-records__archive">
-              <p className="about-records__archive-title">Older logs</p>
 
-              <div className="about-records__archive-list">
-                {aboutArchive.map((entry) => (
-                  <div className="about-records__archive-item" key={entry.title}>
-                    <span>{entry.title}</span>
-                    <span>{entry.date}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="about-records__tabs" aria-label="Career tabs">

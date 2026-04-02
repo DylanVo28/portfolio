@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const profileFields = [
-  { label: "Name", value: "Dinh Nguyen", compact: true },
+  { label: "Name", value: "DINH VO", compact: true },
   { label: "Role", value: "Frontend Developer" },
   { label: "Experience", value: "4 Years Building Web UI", compact: true },
 ];

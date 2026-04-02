@@ -42,7 +42,7 @@ type CarouselTransition =
   | null;
 
 const projectProfileFields = [
-  { label: "Name", value: "Dinh Nguyen" },
+  { label: "Name", value: "DINH VO" },
   { label: "Role", value: "Frontend Developer" },
   { label: "Focus", value: "Next.js / React Native / Web3", compact: true },
 ];
@@ -89,6 +89,40 @@ const projects: Project[] = [
     sideMenu: "Trade · Search · Charts · Tokens",
     sideHeadingLines: ["What", "Swap"],
     sideHeadlineLines: ["Multi-chain", "token trading"],
+  },
+  {
+    title: "What Exchange",
+    image: "/images/what-exchange.png",
+    category: "Web3 Exchange / Hyperliquid Frontend",
+    domain:
+      "Decentralized trading frontend for perpetual, spot, and RWA market workflows on Hyperliquid",
+    published: "What team · 10 members",
+    description:
+      "What Exchange is a decentralized trading platform frontend integrated with Hyperliquid, focused on real-time perpetual, spot, and RWA market data, order placement, portfolio tracking, token swap, referral and points programs, funding-rate comparison, and API wallet management.",
+    role:
+      "Integrated Hyperliquid REST and WebSocket market flows, portfolio and account features, API wallet creation with typed-signature approvals, and perp trading workflows with leverage, TP/SL, slippage, margin actions, and close-position handling.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "TanStack React Query",
+      "Zustand",
+      "Privy",
+      "Wagmi",
+      "viem",
+      "ethers",
+      "Hyperliquid API",
+      "WebSocket",
+      "TradingView Charting Library",
+    ],
+    team: "10 members (What team)",
+    menuLeft: "Perps · Spot · RWA · Portfolio",
+    menuRight: "Orders · Wallet · Funding",
+    heroLabel: "WHAT.EX",
+    sideMenu: "Perps · Spot · API Wallet · Charts",
+    sideHeadingLines: ["What", "Exchange"],
+    sideHeadlineLines: ["Hyperliquid", "trading desk"],
   },
   {
     title: "Starship",
@@ -191,19 +225,61 @@ const projects: Project[] = [
     sideHeadingLines: ["Mobi", "fone"],
     sideHeadlineLines: ["Commerce flow", "with SSR + SEO"],
   },
+  {
+    title: "Blog Website",
+    image: "/images/blog-website.png",
+    category: "Personal Project / Full-stack Blogging Platform",
+    domain:
+      "Full-stack blogging platform with paid questions, internal wallet, author monetization, and AI-assisted workflows",
+    published: "Personal project · solo build",
+    description:
+      "Blog Website is a full-stack blogging platform that lets authors publish articles, engage readers through free comments and paid questions, and track earnings with an internal wallet and author dashboard.",
+    role:
+      "Designed the monetization flow, QR-based deposits, internal wallet handling, real-time notifications, background jobs, vector-powered AI context lookup, and environment-aware backend deployment workflows.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "TanStack React Query",
+      "Zustand",
+      "NestJS",
+      "TypeORM",
+      "PostgreSQL",
+      "pgvector",
+      "Redis",
+      "BullMQ",
+      "Socket.IO",
+      "JWT",
+      "Passport",
+      "Docker",
+      "Docker Compose",
+    ],
+    team: "1 member (personal project)",
+    menuLeft: "Posts · Wallet · Questions · Authors",
+    menuRight: "AI · Deposits · Dashboard",
+    heroLabel: "BLOG.OS",
+    sideMenu: "Posts · Paid Q&A · Wallet · Realtime",
+    sideHeadingLines: ["Blog", "Website"],
+    sideHeadlineLines: ["Monetized", "author platform"],
+  },
 ];
+
+const selectedBuildsCount = projects.length.toString().padStart(2, "0");
 
 const projectTabs = [
   { title: "Trading", caption: "What.swap with OKX-powered multi-chain swap flows." },
+  { title: "Exchange", caption: "What Exchange with Hyperliquid market and perp flows." },
   { title: "Launchpad", caption: "Starship token-claiming flows for Web3 fundraising." },
   { title: "Identity", caption: "OneID profile and KYC work on Viction." },
   { title: "Mobile", caption: "3 Tốt app for shrimp-farming operations." },
   { title: "Commerce", caption: "Mobifone SSR storefront with dynamic SEO." },
+  { title: "Blog", caption: "Blog platform with wallet, AI jobs, and realtime flows." },
 ];
 
 const projectRewards = [
-  { label: "Projects", value: "+05" },
-  { label: "Domains", value: "+04" },
+  { label: "Projects", value: `+${selectedBuildsCount}` },
+  { label: "Domains", value: "+05" },
 ];
 
 const projectControls = [
@@ -387,7 +463,7 @@ export function Projects() {
       <header className="projects-dossier__topbar">
         <div className="projects-dossier__metrics">
           <div className="projects-dossier__metric">
-            <span className="projects-dossier__metric-value">05</span>
+            <span className="projects-dossier__metric-value">{selectedBuildsCount}</span>
             <span className="projects-dossier__tiny">Selected Builds</span>
           </div>
 
@@ -405,8 +481,8 @@ export function Projects() {
 
         <div className="projects-dossier__signals">
           <span>Web3 DApps / mobile apps / SSR commerce</span>
-          <span>What / Coin98 / outsource / PVS delivery track</span>
-          <span>Updated: 2026.04.01</span>
+          <span>What / Coin98 / outsource / PVS / personal build track</span>
+          <span>Updated: 2026.04.02</span>
         </div>
       </header>
 
@@ -455,7 +531,8 @@ export function Projects() {
 
         <section className="projects-main" aria-labelledby="projects-dossier-title">
           <div className="projects-main__inner">
-            <p className="projects-main__page-title">Projects</p>
+            <p className="projects-main__page-title">Projects
+            </p>
 
             <div className="projects-carousel" aria-label="Selected project previews">
               <button

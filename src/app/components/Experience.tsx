@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 
 const experienceProfileFields = [
-  { label: "Name", value: "Dinh Nguyen" },
+  { label: "Name", value: "DINH VO" },
   { label: "Role", value: "Frontend / Fullstack Developer" },
   { label: "Timeline", value: "2021 / 2026 Career Track", compact: true },
 ];

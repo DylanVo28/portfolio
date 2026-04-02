@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dinh Nguyen | Frontend Developer",
+  title: "DINH VO | Frontend Developer",
   description:
     "Frontend developer with 4 years of experience building polished web interfaces with React, Next.js, and TypeScript.",
 };
