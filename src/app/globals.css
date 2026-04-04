@@ -87,7 +87,7 @@ button {
 
 .landing-shell--fixed-asides > * {
   width: 100%;
-  max-width: var(--content-max-width);
+  /*max-width: var(--content-max-width);*/
   margin-inline: auto;
 }
 
@@ -678,8 +678,8 @@ button {
   }
 
   .cyber-banner--fixed-asides {
-    height: calc(100vh - (var(--shell-padding) * 2));
-    min-height: calc(100vh - (var(--shell-padding) * 2));
+    height: calc(100dvh - (var(--shell-padding) * 2));
+    min-height: calc(100dvh - (var(--shell-padding) * 2));
   }
 
   .cyber-banner--fixed-asides .cyber-banner__layout {
@@ -698,7 +698,8 @@ button {
     position: fixed;
     top: var(--shell-padding);
     width: var(--side-panel-width);
-    max-height: calc(100vh - (var(--shell-padding) * 2));
+    height: calc(100dvh - (var(--shell-padding) * 2));
+    max-height: calc(100dvh - (var(--shell-padding) * 2));
     overflow: auto;
     z-index: 4;
     scrollbar-width: thin;
