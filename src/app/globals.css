@@ -3873,7 +3873,7 @@ button {
   height: 100%;
   min-height: inherit;
   overflow: hidden;
-  padding: clamp(18px, 2vw, 24px);
+  /*padding: clamp(18px, 2vw, 24px);*/
   background:
     radial-gradient(circle at 70% 28%, rgba(0, 180, 255, 0.22), transparent 18%),
     radial-gradient(circle at 50% 80%, rgba(255, 0, 110, 0.15), transparent 20%),
