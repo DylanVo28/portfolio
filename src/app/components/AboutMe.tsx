@@ -67,33 +67,6 @@ export function AboutMe() {
   return (
     <section className="about-dossier" aria-labelledby="about-dossier-title">
       <div className="about-dossier__scanline" aria-hidden="true" />
-
-      <header className="about-dossier__topbar">
-        <div className="about-dossier__metrics">
-          <div className="about-dossier__metric">
-            <span className="about-dossier__metric-value">04</span>
-            <span className="about-dossier__tiny">Years Shipping UI</span>
-          </div>
-
-          <div className="plus-box" aria-hidden="true">
-            +
-          </div>
-
-          <div className="about-dossier__metric">
-            <span className="about-dossier__metric-value about-dossier__metric-value--accent">
-              03
-            </span>
-            <span className="about-dossier__tiny">Years Blockchain / DApp</span>
-          </div>
-        </div>
-
-        <div className="about-dossier__signals">
-          <span>Ho Chi Minh City / Vietnam</span>
-          <span>Websites / Mobile Apps / DApps</span>
-          <span>Remote-ready workflow</span>
-        </div>
-      </header>
-
       <div className="about-dossier__layout">
         <aside className="about-panel about-profile">
           <div className="about-profile__avatar" aria-hidden="true">

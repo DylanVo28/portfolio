@@ -104,33 +104,6 @@ export function Experience() {
       aria-labelledby="experience-dossier-title"
     >
       <div className="experience-dossier__scanline" aria-hidden="true" />
-
-      <header className="experience-dossier__topbar">
-        <div className="experience-dossier__metrics">
-          <div className="experience-dossier__metric">
-            <span className="experience-dossier__metric-value">04</span>
-            <span className="experience-dossier__tiny">Years Frontend</span>
-          </div>
-
-          <div className="plus-box" aria-hidden="true">
-            +
-          </div>
-
-          <div className="experience-dossier__metric">
-            <span className="experience-dossier__metric-value experience-dossier__metric-value--accent">
-              03
-            </span>
-            <span className="experience-dossier__tiny">Years Blockchain</span>
-          </div>
-        </div>
-
-        <div className="experience-dossier__signals">
-          <span>Career timeline</span>
-          <span>What Exchange / Coin98 / PVS / Mediastep</span>
-          <span>Updated: 2026.04.01</span>
-        </div>
-      </header>
-
       <div className="experience-dossier__layout">
         <aside className="experience-panel experience-profile">
           <div className="experience-profile__avatar" aria-hidden="true">

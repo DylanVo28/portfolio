@@ -111,10 +111,6 @@ export function Banner() {
 
         <section className="hero-panel">
           <div className="hero-panel__copy">
-            <p className="hero-panel__eyebrow">
-              Frontend Developer / 4 Years Experience
-            </p>
-
             <h1 className="hero-panel__title">FRONTEND / WEB3 DEVELOPER</h1>
 
             <div className="hero-panel__chips" aria-label="Core strengths">

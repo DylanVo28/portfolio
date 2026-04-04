@@ -434,7 +434,7 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 360px;
-  padding: clamp(20px, 3vw, 36px) 12px;
+  /*padding: clamp(20px, 3vw, 36px) 12px;*/
   mix-blend-mode: color-dodge;
 }
 
@@ -451,7 +451,7 @@ button {
 
 .hero-panel__image-frame {
   position: relative;
-  width: min(80%, 1120px);
+  /*width: min(80%, 1120px);*/
   aspect-ratio: 2528 / 1686;
   margin-inline: -6%;
   isolation: isolate;
@@ -3517,7 +3517,7 @@ button {
 .contact-terminal {
   position: relative;
   isolation: isolate;
-  width: min(100%, 1680px);
+  width: 100%;
   padding: clamp(18px, 2vw, 28px);
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.9)),

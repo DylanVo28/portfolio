@@ -459,33 +459,6 @@ export function Projects() {
   return (
     <section className="projects-dossier" aria-labelledby="projects-dossier-title">
       <div className="projects-dossier__scanline" aria-hidden="true" />
-
-      <header className="projects-dossier__topbar">
-        <div className="projects-dossier__metrics">
-          <div className="projects-dossier__metric">
-            <span className="projects-dossier__metric-value">{selectedBuildsCount}</span>
-            <span className="projects-dossier__tiny">Selected Builds</span>
-          </div>
-
-          <div className="plus-box" aria-hidden="true">
-            +
-          </div>
-
-          <div className="projects-dossier__metric">
-            <span className="projects-dossier__metric-value projects-dossier__metric-value--accent">
-              04
-            </span>
-            <span className="projects-dossier__tiny">Years Shipping UI</span>
-          </div>
-        </div>
-
-        <div className="projects-dossier__signals">
-          <span>Web3 DApps / mobile apps / SSR commerce</span>
-          <span>What / Coin98 / outsource / PVS / personal build track</span>
-          <span>Updated: 2026.04.02</span>
-        </div>
-      </header>
-
       <div className="projects-dossier__layout">
         <aside className="projects-panel projects-profile">
           <div className="projects-profile__avatar" aria-hidden="true">
