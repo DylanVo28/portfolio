@@ -3873,12 +3873,37 @@ button {
   height: 100%;
   min-height: inherit;
   overflow: hidden;
+  padding: clamp(18px, 2vw, 24px);
   background:
     radial-gradient(circle at 70% 28%, rgba(0, 180, 255, 0.22), transparent 18%),
     radial-gradient(circle at 50% 80%, rgba(255, 0, 110, 0.15), transparent 20%),
     linear-gradient(180deg, #01030a, #000 70%);
   border: 1px solid rgba(255, 77, 79, 0.18);
   box-shadow: var(--shadow);
+}
+
+.contact-viewer__hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  height: 100%;
+  padding: clamp(18px, 2vw, 24px);
+}
+
+.contact-viewer__hero .hero-panel__title {
+  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+}
+
+.contact-viewer__hero .hero-panel__art {
+  min-height: 320px;
+}
+
+.contact-viewer__hero .hero-tabs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-viewer__hero .hero-tab {
+  min-height: 84px;
 }
 
 .contact-viewer__frame::before,
@@ -4373,6 +4398,10 @@ button {
     min-height: 560px;
     transform: perspective(1500px) rotateY(-10deg) rotateX(2deg);
   }
+
+  .contact-viewer__hero .hero-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 980px) {
@@ -4406,8 +4435,9 @@ button {
     transform: none;
   }
 
-  .contact-viewer__tabs {
-    left: 132px;
+  .contact-viewer__frame,
+  .contact-viewer__hero {
+    padding: 18px;
   }
 }
 
@@ -4440,6 +4470,15 @@ button {
 
   .contact-viewer {
     min-height: 460px;
+  }
+
+  .contact-viewer__frame,
+  .contact-viewer__hero {
+    padding: 16px;
+  }
+
+  .contact-viewer__hero .hero-tabs {
+    grid-template-columns: 1fr;
   }
 
   .contact-viewer__topbar {

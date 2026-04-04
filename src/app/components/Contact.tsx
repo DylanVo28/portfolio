@@ -1,37 +1,9 @@
+import { HeroShowcase } from "./HeroShowcase";
+
 const contactHudItems = [
   "STATUS: OPEN TO WORK",
   "TIME ZONE: GMT+7",
   "FOCUS: REACT / NEXT.JS",
-];
-
-const contactProfileLines = [
-  "DINH VO",
-  "FRONTEND DEVELOPER",
-  "HO CHI MINH CITY",
-];
-
-const contactProfileBadges = [
-  { label: "OPEN FOR HIRE", marker: "◁" },
-  { label: "REMOTE READY", marker: "⟫" },
-];
-
-const contactTabs = [
-  {
-    title: "Beginning",
-    description: "From UI foundations to production-ready interfaces.",
-  },
-  {
-    title: "Logs",
-    description: "React, Next.js, TypeScript, motion, and clean systems.",
-  },
-  {
-    title: "Projects",
-    description: "Web products, dashboards, DApps, and product websites.",
-  },
-  {
-    title: "Contact",
-    description: "Open to frontend roles and thoughtful product work.",
-  },
 ];
 
 const contactControls = [
@@ -181,75 +153,9 @@ export function Contact() {
           {/*  </div>*/}
           {/*</form>*/}
 
-          <section className="contact-viewer" aria-label="Cyberpunk contact preview">
+          <section className="contact-viewer" aria-label="Angled banner preview">
             <div className="contact-viewer__frame">
-              <div className="contact-viewer__topbar">
-                <div className="contact-viewer__metric">
-                  <span className="contact-viewer__metric-value">04</span>
-                  <span className="contact-viewer__metric-label">YEARS</span>
-                </div>
-
-                <div className="contact-viewer__plus" aria-hidden="true">
-                  +
-                </div>
-
-                <div className="contact-viewer__metric">
-                  <span className="contact-viewer__metric-value">REACT</span>
-                  <span className="contact-viewer__metric-label">NEXT / UI SYSTEMS</span>
-                </div>
-              </div>
-
-              <div className="contact-viewer__profile" aria-hidden="true">
-                <div className="contact-viewer__avatar" />
-
-                <div className="contact-viewer__profile-lines">
-                  {contactProfileLines.map((line) => (
-                    <div key={line}>{line}</div>
-                  ))}
-
-                  {contactProfileBadges.map((badge) => (
-                    <div className="contact-viewer__profile-badge" key={badge.label}>
-                      <span>{badge.label}</span>
-                      <span>{badge.marker}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="contact-viewer__copy">
-                BUILDING INTERFACES THAT FEEL FAST, CLEAR, AND PRODUCT-READY
-                <br />
-                FROM EARLY IDEA TO POLISHED SHIP
-                <span className="contact-viewer__copy-sub">
-                  PURE CSS COMPOSITION / CYBERPUNK CONTACT PANEL
-                </span>
-              </div>
-
-              <div className="contact-viewer__art" aria-hidden="true">
-                <div className="contact-viewer__glow-floor" />
-                <div className="contact-viewer__wave-lines" />
-                <div className="contact-viewer__tail" />
-                <div className="contact-viewer__whale">
-                  <div className="contact-viewer__eye" />
-                </div>
-                <div className="contact-viewer__fin" />
-              </div>
-
-              <div className="contact-viewer__tabs" aria-label="Contact preview tabs">
-                {contactTabs.map((tab, index) => (
-                  <article
-                    className={
-                      index === contactTabs.length - 1
-                        ? "contact-viewer__tab contact-viewer__tab--active"
-                        : "contact-viewer__tab"
-                    }
-                    key={tab.title}
-                  >
-                    <b>{tab.title}</b>
-                    <span>{tab.description}</span>
-                  </article>
-                ))}
-              </div>
+              <HeroShowcase activeHref="#contact-section" className="contact-viewer__hero" />
             </div>
           </section>
 
