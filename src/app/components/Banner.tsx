@@ -6,42 +6,30 @@ const profileFields = [
 
 const heroChips = ["4 Years", "Next.js", "React", "React Native", "NestJS"];
 
-const tabs = [
-  { title: "About", caption: "Who I am and how I approach frontend work." },
-  { title: "Projects", caption: "Selected case studies with clear product impact." },
-  { title: "Stack", caption: "React, Next.js, TypeScript, UI systems, motion." },
-  { title: "Experience", caption: "4 years shipping interfaces for real products." },
-  { title: "Contact", caption: "Available for teams building thoughtful web apps." },
-];
-
-const contactItems = [
+const sectionLinks = [
   {
-    label: "Phone",
-    links: [{ href: "tel:+84392857487", text: "+84 392 857 487" }],
+    title: "About",
+    caption: "Who I am and how I approach frontend work.",
+    detail: "Profile summary, skills, and delivery mindset.",
+    href: "#about-section",
   },
   {
-    label: "Email",
-    links: [{ href: "mailto:kedinhvo2000@gmail.com", text: "kedinhvo2000@gmail.com" }],
+    title: "Experience",
+    caption: "4 years shipping interfaces for real products.",
+    detail: "Career timeline across frontend, DApp, and exchange work.",
+    href: "#experience-section",
   },
   {
-    label: "LinkedIn",
-    links: [
-      {
-        href: "https://www.linkedin.com/in/dinh-vo-a81835139/",
-        text: "linkedin.com/in/dinh-vo-a81835139",
-      },
-    ],
+    title: "Projects",
+    caption: "Selected case studies with clear product impact.",
+    detail: "Product builds, technical scope, and implementation details.",
+    href: "#projects-section",
   },
   {
-    label: "GitHub",
-    links: [
-      { href: "https://github.com/dinhvdk", text: "github.com/dinhvdk" },
-      { href: "https://github.com/DylanVo28", text: "github.com/DylanVo28" },
-    ],
-  },
-  {
-    label: "My Website",
-    links: [{ href: "https://dinhvdk.vercel.app/about", text: "dinhvdk.vercel.app/about" }],
+    title: "Contact",
+    caption: "Available for teams building thoughtful web apps.",
+    detail: "Ways to connect for roles, products, and collaboration.",
+    href: "#contact-section",
   },
 ];
 
@@ -138,42 +126,29 @@ export function Banner() {
           </div>
 
           <nav className="hero-tabs" aria-label="Portfolio sections">
-            {tabs.map((tab, index) => (
-              <button
+            {sectionLinks.map((section, index) => (
+              <a
                 className={index === 0 ? "hero-tab hero-tab--active" : "hero-tab"}
-                key={tab.title}
-                type="button"
+                href={section.href}
+                key={section.title}
               >
-                <strong>{tab.title}</strong>
-                <span>{tab.caption}</span>
-              </button>
+                <strong>{section.title}</strong>
+                <span>{section.caption}</span>
+              </a>
             ))}
           </nav>
         </section>
 
         <aside className="cyber-panel contact-panel">
-          <p className="contact-panel__title">Contact</p>
-          <p className="contact-panel__subtitle">Direct channels and public profiles</p>
+          <p className="contact-panel__title">Navigate</p>
+          <p className="contact-panel__subtitle">Jump to key portfolio sections</p>
 
           <div className="contact-panel__list">
-            {contactItems.map((item) => (
-              <div className="contact-panel__item" key={item.label}>
-                <p className="contact-panel__label">{item.label}</p>
-
-                <div className="contact-panel__links">
-                  {item.links.map((link) => (
-                    <a
-                      className="contact-panel__link"
-                      href={link.href}
-                      key={link.href}
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                    >
-                      {link.text}
-                    </a>
-                  ))}
-                </div>
-              </div>
+            {sectionLinks.map((section) => (
+              <a className="contact-panel__item" href={section.href} key={section.title}>
+                <p className="contact-panel__label">{section.title}</p>
+                <p className="contact-panel__link">{section.detail}</p>
+              </a>
             ))}
           </div>
         </aside>

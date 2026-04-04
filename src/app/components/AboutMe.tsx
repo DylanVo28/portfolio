@@ -34,7 +34,11 @@ const aboutTabs = [
 
 export function AboutMe() {
   return (
-    <section className="about-dossier" aria-labelledby="about-dossier-title">
+    <section
+      className="about-dossier portfolio-section-anchor"
+      id="about-section"
+      aria-labelledby="about-dossier-title"
+    >
       <div className="about-dossier__scanline" aria-hidden="true" />
       <div className="about-dossier__layout">
         <section
@@ -77,21 +81,21 @@ export function AboutMe() {
             </div>
           </div>
 
-          <div className="about-records__tabs" aria-label="Career tabs">
-            {aboutTabs.map((tab, index) => (
-              <article
-                className={
-                  index === 1
-                    ? "about-records__tab about-records__tab--active"
-                    : "about-records__tab"
-                }
-                key={tab.title}
-              >
-                <strong>{tab.title}</strong>
-                <span>{tab.caption}</span>
-              </article>
-            ))}
-          </div>
+          {/*<div className="about-records__tabs" aria-label="Career tabs">*/}
+          {/*  {aboutTabs.map((tab, index) => (*/}
+          {/*    <article*/}
+          {/*      className={*/}
+          {/*        index === 1*/}
+          {/*          ? "about-records__tab about-records__tab--active"*/}
+          {/*          : "about-records__tab"*/}
+          {/*      }*/}
+          {/*      key={tab.title}*/}
+          {/*    >*/}
+          {/*      <strong>{tab.title}</strong>*/}
+          {/*      <span>{tab.caption}</span>*/}
+          {/*    </article>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
         </section>
       </div>
     </section>

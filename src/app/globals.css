@@ -35,6 +35,7 @@
 html {
   min-height: 100%;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -70,6 +71,10 @@ body::before {
 
 button {
   font: inherit;
+}
+
+.portfolio-section-anchor {
+  scroll-margin-top: calc(var(--shell-padding) + 12px);
 }
 
 .landing-shell {
@@ -547,7 +552,7 @@ button {
 
 .hero-tabs {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin-top: 12px;
 }
@@ -565,6 +570,7 @@ button {
   text-align: left;
   text-transform: uppercase;
   color: #f3f5fa;
+  text-decoration: none;
   box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.02);
   transition:
     transform 180ms ease,
@@ -643,13 +649,12 @@ button {
   padding: 12px;
   border: 1px solid rgba(255, 59, 77, 0.18);
   background: linear-gradient(180deg, rgba(18, 18, 24, 0.9), rgba(6, 7, 12, 0.95));
-}
-
-.contact-panel__links {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
 .contact-panel__link {
@@ -658,16 +663,22 @@ button {
   font-size: 0.75rem;
   line-height: 1.6;
   letter-spacing: 0.06em;
-  text-decoration: none;
   word-break: break-word;
+  margin: 0;
   transition: color 180ms ease;
 }
 
-.contact-panel__link:hover {
+.contact-panel__item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 59, 77, 0.42);
+  background: linear-gradient(180deg, rgba(28, 20, 28, 0.94), rgba(10, 10, 14, 0.98));
+}
+
+.contact-panel__item:hover .contact-panel__link {
   color: var(--cyan);
 }
 
-.contact-panel__link:focus-visible {
+.contact-panel__item:focus-visible {
   outline: 1px solid var(--cyan);
   outline-offset: 2px;
 }

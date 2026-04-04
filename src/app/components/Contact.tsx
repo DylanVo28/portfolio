@@ -42,7 +42,11 @@ const contactControls = [
 
 export function Contact() {
   return (
-    <section className="contact-terminal" aria-labelledby="contact-terminal-title">
+    <section
+      className="contact-terminal portfolio-section-anchor"
+      id="contact-section"
+      aria-labelledby="contact-terminal-title"
+    >
       <div className="contact-terminal__scanline" aria-hidden="true" />
 
       <div className="contact-terminal__stage">

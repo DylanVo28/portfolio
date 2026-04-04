@@ -78,7 +78,8 @@ const progressRingStyle = {
 export function Experience() {
   return (
     <section
-      className="experience-dossier"
+      className="experience-dossier portfolio-section-anchor"
+      id="experience-section"
       aria-labelledby="experience-dossier-title"
     >
       <div className="experience-dossier__scanline" aria-hidden="true" />
@@ -224,21 +225,21 @@ export function Experience() {
             </div>
           </div>
 
-          <div className="experience-tabs" aria-label="Experience tabs">
-            {experienceTabs.map((tab, index) => (
-              <article
-                className={
-                  index === 2
-                    ? "experience-tab experience-tab--active"
-                    : "experience-tab"
-                }
-                key={tab.title}
-              >
-                <strong>{tab.title}</strong>
-                <span>{tab.caption}</span>
-              </article>
-            ))}
-          </div>
+          {/*<div className="experience-tabs" aria-label="Experience tabs">*/}
+          {/*  {experienceTabs.map((tab, index) => (*/}
+          {/*    <article*/}
+          {/*      className={*/}
+          {/*        index === 2*/}
+          {/*          ? "experience-tab experience-tab--active"*/}
+          {/*          : "experience-tab"*/}
+          {/*      }*/}
+          {/*      key={tab.title}*/}
+          {/*    >*/}
+          {/*      <strong>{tab.title}</strong>*/}
+          {/*      <span>{tab.caption}</span>*/}
+          {/*    </article>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
         </section>
       </div>
     </section>

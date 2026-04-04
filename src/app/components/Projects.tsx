@@ -433,7 +433,11 @@ export function Projects() {
   const carouselCards = getCarouselCards();
 
   return (
-    <section className="projects-dossier" aria-labelledby="projects-dossier-title">
+    <section
+      className="projects-dossier portfolio-section-anchor"
+      id="projects-section"
+      aria-labelledby="projects-dossier-title"
+    >
       <div className="projects-dossier__scanline" aria-hidden="true" />
       <div className="projects-dossier__layout">
         <section className="projects-main" aria-labelledby="projects-dossier-title">
@@ -557,19 +561,19 @@ export function Projects() {
             </div>
           </div>
 
-          <div className="projects-tabs" aria-label="Projects tabs">
-            {projectTabs.map((tab, index) => (
-              <article
-                className={
-                  index === 0 ? "project-tab project-tab--active" : "project-tab"
-                }
-                key={tab.title}
-              >
-                <strong>{tab.title}</strong>
-                <span>{tab.caption}</span>
-              </article>
-            ))}
-          </div>
+          {/*<div className="projects-tabs" aria-label="Projects tabs">*/}
+          {/*  {projectTabs.map((tab, index) => (*/}
+          {/*    <article*/}
+          {/*      className={*/}
+          {/*        index === 0 ? "project-tab project-tab--active" : "project-tab"*/}
+          {/*      }*/}
+          {/*      key={tab.title}*/}
+          {/*    >*/}
+          {/*      <strong>{tab.title}</strong>*/}
+          {/*      <span>{tab.caption}</span>*/}
+          {/*    </article>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
         </section>
       </div>
     </section>
