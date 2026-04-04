@@ -40,6 +40,37 @@ const contactControls = [
   { label: "Visual settings", state: "⚙" },
 ];
 
+const contactLinks = [
+  {
+    label: "Phone",
+    links: [{ href: "tel:+84392857487", text: "+84 392 857 487" }],
+  },
+  {
+    label: "Email",
+    links: [{ href: "mailto:kedinhvo2000@gmail.com", text: "kedinhvo2000@gmail.com" }],
+  },
+  {
+    label: "LinkedIn",
+    links: [
+      {
+        href: "https://www.linkedin.com/in/dinh-vo-a81835139/",
+        text: "linkedin.com/in/dinh-vo-a81835139",
+      },
+    ],
+  },
+  {
+    label: "GitHub",
+    links: [
+      { href: "https://github.com/dinhvdk", text: "github.com/dinhvdk" },
+      { href: "https://github.com/DylanVo28", text: "github.com/DylanVo28" },
+    ],
+  },
+  {
+    label: "My Website",
+    links: [{ href: "https://dinhvdk.vercel.app/about", text: "dinhvdk.vercel.app/about" }],
+  },
+];
+
 export function Contact() {
   return (
     <section
@@ -68,65 +99,87 @@ export function Contact() {
               WANNA CHAT? OR SHARE A PRODUCT, ROLE, JOB, OR IDEA THAT NEEDS SHARP
               FRONTEND EXECUTION?
             </p>
+
+            <div className="contact-terminal__direct-links" aria-label="Direct contact links">
+              {contactLinks.map((item) => (
+                <div className="contact-terminal__link-group" key={item.label}>
+                  <p className="contact-terminal__link-label">{item.label}</p>
+
+                  <div className="contact-terminal__link-stack">
+                    {item.links.map((link) => (
+                      <a
+                        className="contact-terminal__link-anchor"
+                        href={link.href}
+                        key={link.href}
+                        rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                      >
+                        {link.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <form className="contact-form-panel" aria-label="Contact form">
-            <div className="contact-form-panel__field">
-              <label className="contact-form-panel__label" htmlFor="contact-name">
-                HOW SHOULD I CALL YOU?
-              </label>
-              <input
-                autoComplete="name"
-                className="contact-form-panel__input"
-                id="contact-name"
-                name="name"
-                placeholder="YOUR NAME"
-                type="text"
-              />
-            </div>
+          {/*<form className="contact-form-panel" aria-label="Contact form">*/}
+          {/*  <div className="contact-form-panel__field">*/}
+          {/*    <label className="contact-form-panel__label" htmlFor="contact-name">*/}
+          {/*      HOW SHOULD I CALL YOU?*/}
+          {/*    </label>*/}
+          {/*    <input*/}
+          {/*      autoComplete="name"*/}
+          {/*      className="contact-form-panel__input"*/}
+          {/*      id="contact-name"*/}
+          {/*      name="name"*/}
+          {/*      placeholder="YOUR NAME"*/}
+          {/*      type="text"*/}
+          {/*    />*/}
+          {/*  </div>*/}
 
-            <div className="contact-form-panel__field">
-              <label className="contact-form-panel__label" htmlFor="contact-email">
-                SENDING FROM
-              </label>
-              <input
-                autoComplete="email"
-                className="contact-form-panel__input"
-                id="contact-email"
-                name="email"
-                placeholder="YOUR.NAME@EXAMPLE.COM"
-                type="email"
-              />
-            </div>
+          {/*  <div className="contact-form-panel__field">*/}
+          {/*    <label className="contact-form-panel__label" htmlFor="contact-email">*/}
+          {/*      SENDING FROM*/}
+          {/*    </label>*/}
+          {/*    <input*/}
+          {/*      autoComplete="email"*/}
+          {/*      className="contact-form-panel__input"*/}
+          {/*      id="contact-email"*/}
+          {/*      name="email"*/}
+          {/*      placeholder="YOUR.NAME@EXAMPLE.COM"*/}
+          {/*      type="email"*/}
+          {/*    />*/}
+          {/*  </div>*/}
 
-            <div className="contact-form-panel__field contact-form-panel__field--message">
-              <label className="contact-form-panel__label" htmlFor="contact-message">
-                TRANSMITTED DATA
-              </label>
-              <textarea
-                className="contact-form-panel__textarea"
-                id="contact-message"
-                name="message"
-                placeholder="HI, I WRITE TO YOU ABOUT..."
-                rows={8}
-              />
-            </div>
+          {/*  <div className="contact-form-panel__field contact-form-panel__field--message">*/}
+          {/*    <label className="contact-form-panel__label" htmlFor="contact-message">*/}
+          {/*      TRANSMITTED DATA*/}
+          {/*    </label>*/}
+          {/*    <textarea*/}
+          {/*      className="contact-form-panel__textarea"*/}
+          {/*      id="contact-message"*/}
+          {/*      name="message"*/}
+          {/*      placeholder="HI, I WRITE TO YOU ABOUT..."*/}
+          {/*      rows={8}*/}
+          {/*    />*/}
+          {/*  </div>*/}
 
-            <div className="contact-form-panel__actions">
-              <button
-                className="contact-form-panel__button contact-form-panel__button--primary"
-                type="button"
-              >
-                SEND MESSAGE [ENTER]
-              </button>
-              <button
-                className="contact-form-panel__button contact-form-panel__button--secondary"
-                type="reset"
-              >
-                DISCARD [ESC]
-              </button>
-            </div>
-          </form>
+          {/*  <div className="contact-form-panel__actions">*/}
+          {/*    <button*/}
+          {/*      className="contact-form-panel__button contact-form-panel__button--primary"*/}
+          {/*      type="button"*/}
+          {/*    >*/}
+          {/*      SEND MESSAGE [ENTER]*/}
+          {/*    </button>*/}
+          {/*    <button*/}
+          {/*      className="contact-form-panel__button contact-form-panel__button--secondary"*/}
+          {/*      type="reset"*/}
+          {/*    >*/}
+          {/*      DISCARD [ESC]*/}
+          {/*    </button>*/}
+          {/*  </div>*/}
+          {/*</form>*/}
 
           <section className="contact-viewer" aria-label="Cyberpunk contact preview">
             <div className="contact-viewer__frame">

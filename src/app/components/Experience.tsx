@@ -58,14 +58,6 @@ const earlierExperiences = [
   },
 ];
 
-const experienceTabs = [
-  { title: "Beginning", caption: "Early web foundations and first React builds." },
-  { title: "Logs", caption: "Skills, strengths, and technical direction." },
-  { title: "Experience", caption: "Milestones across frontend and DApp work." },
-  { title: "Creations", caption: "Interfaces shipped with product intent." },
-  { title: "Next", caption: "More ownership, sharper systems, better communication." },
-];
-
 const trackedRoles = featuredExperiences.length + earlierExperiences.length;
 const progressCurrent = trackedRoles;
 const progressTotal = trackedRoles;

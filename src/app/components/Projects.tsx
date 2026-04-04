@@ -254,16 +254,6 @@ const projects: Project[] = [
   },
 ];
 
-const projectTabs = [
-  { title: "Trading", caption: "What.swap with OKX-powered multi-chain swap flows." },
-  { title: "Exchange", caption: "What Exchange with Hyperliquid market and perp flows." },
-  { title: "Launchpad", caption: "Starship token-claiming flows for Web3 fundraising." },
-  { title: "Identity", caption: "OneID profile and KYC work on Viction." },
-  { title: "Mobile", caption: "3 Tốt app for shrimp-farming operations." },
-  { title: "Commerce", caption: "Mobifone SSR storefront with dynamic SEO." },
-  { title: "Blog", caption: "Blog platform with wallet, AI jobs, and realtime flows." },
-];
-
 const CAROUSEL_TRANSITION_MS = 460;
 
 function getWrappedIndex(index: number) {

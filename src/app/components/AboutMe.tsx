@@ -24,14 +24,6 @@ const aboutSkillCards = [
   },
 ];
 
-const aboutTabs = [
-  { title: "Beginning", caption: "From markup basics to React product work." },
-  { title: "Logs", caption: "Summary, capabilities, and delivery experience." },
-  { title: "Achievements", caption: "Web, mobile, and DApp work across teams." },
-  { title: "Creations", caption: "Frontend systems built with product focus." },
-  { title: "Next", caption: "Keep improving depth, speed, and collaboration." },
-];
-
 export function AboutMe() {
   return (
     <section

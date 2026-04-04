@@ -3678,6 +3678,59 @@ button {
   font-weight: 700;
 }
 
+.contact-terminal__direct-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid rgba(255, 77, 79, 0.18);
+  background: linear-gradient(180deg, rgba(18, 8, 12, 0.82), rgba(8, 8, 12, 0.92));
+}
+
+.contact-terminal__link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-terminal__link-label {
+  margin: 0;
+  color: var(--red);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.contact-terminal__link-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-terminal__link-anchor {
+  color: #eef2f8;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: none;
+  word-break: break-word;
+  transition: color 160ms ease;
+}
+
+.contact-terminal__link-anchor:hover {
+  color: var(--cyan);
+}
+
+.contact-terminal__link-anchor:focus-visible {
+  outline: 1px solid var(--cyan);
+  outline-offset: 2px;
+}
+
 .contact-form-panel {
   grid-area: form;
   display: flex;
