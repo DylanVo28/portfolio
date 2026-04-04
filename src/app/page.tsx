@@ -6,7 +6,7 @@ import { Projects } from "./components/Projects";
 
 export default function Home() {
   return (
-    <main className="landing-shell">
+    <main className="landing-shell landing-shell--fixed-asides">
       <Banner />
       <AboutMe />
       <Experience />

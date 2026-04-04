@@ -41,17 +41,6 @@ type CarouselTransition =
     }
   | null;
 
-const projectProfileFields = [
-  { label: "Name", value: "DINH VO" },
-  { label: "Role", value: "Frontend Developer" },
-  { label: "Focus", value: "Next.js / React Native / Web3", compact: true },
-];
-
-const projectStatusBadges = [
-  { label: "Availability", value: "#OPENTOWORK", marker: "◁" },
-  { label: "Signal", value: "Web3 / mobile / eCommerce delivery", marker: "⟫" },
-];
-
 const projects: Project[] = [
   {
     title: "What.swap",
@@ -265,8 +254,6 @@ const projects: Project[] = [
   },
 ];
 
-const selectedBuildsCount = projects.length.toString().padStart(2, "0");
-
 const projectTabs = [
   { title: "Trading", caption: "What.swap with OKX-powered multi-chain swap flows." },
   { title: "Exchange", caption: "What Exchange with Hyperliquid market and perp flows." },
@@ -275,17 +262,6 @@ const projectTabs = [
   { title: "Mobile", caption: "3 Tốt app for shrimp-farming operations." },
   { title: "Commerce", caption: "Mobifone SSR storefront with dynamic SEO." },
   { title: "Blog", caption: "Blog platform with wallet, AI jobs, and realtime flows." },
-];
-
-const projectRewards = [
-  { label: "Projects", value: `+${selectedBuildsCount}` },
-  { label: "Domains", value: "+05" },
-];
-
-const projectControls = [
-  { label: "Web3 products", state: "✓", tone: "positive" },
-  { label: "Mobile delivery", state: "✓", tone: "positive" },
-  { label: "SSR / SEO", state: "⚙", tone: "accent" },
 ];
 
 const CAROUSEL_TRANSITION_MS = 460;
@@ -460,52 +436,9 @@ export function Projects() {
     <section className="projects-dossier" aria-labelledby="projects-dossier-title">
       <div className="projects-dossier__scanline" aria-hidden="true" />
       <div className="projects-dossier__layout">
-        <aside className="projects-panel projects-profile">
-          <div className="projects-profile__avatar" aria-hidden="true">
-            <span className="projects-profile__avatar-tag">PX</span>
-          </div>
-
-          {projectProfileFields.map((field) => (
-            <div className="projects-profile__field" key={field.label}>
-              <p className="projects-profile__label">{field.label}</p>
-              <p
-                className={
-                  field.compact
-                    ? "projects-profile__value projects-profile__value--compact"
-                    : "projects-profile__value"
-                }
-              >
-                {field.value}
-              </p>
-            </div>
-          ))}
-
-          {projectStatusBadges.map((badge) => (
-            <div className="projects-profile__field" key={badge.label}>
-              <p className="projects-profile__label">{badge.label}</p>
-              <p className="projects-profile__badge">
-                {badge.value}
-                <span aria-hidden="true">{badge.marker}</span>
-              </p>
-            </div>
-          ))}
-
-          <div className="projects-profile__motto">
-            <p className="projects-profile__label">Motto</p>
-            <p className="projects-profile__quote">
-              Build with clarity.
-              <br />
-              Style with intent.
-              <br />
-              Ship what holds up.
-            </p>
-          </div>
-        </aside>
-
         <section className="projects-main" aria-labelledby="projects-dossier-title">
           <div className="projects-main__inner">
-            <p className="projects-main__page-title">Projects
-            </p>
+            <p className="projects-main__page-title">Projects</p>
 
             <div className="projects-carousel" aria-label="Selected project previews">
               <button
@@ -638,72 +571,6 @@ export function Projects() {
             ))}
           </div>
         </section>
-
-        <aside className="projects-panel projects-sidebar">
-          <p className="projects-sidebar__title">
-            <span>Active Quest</span>
-            <span aria-hidden="true">◁</span>
-          </p>
-          <p className="projects-sidebar__subtitle">Selected Frontend Work</p>
-
-          <div className="projects-sidebar__content">
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Quest Name</p>
-              <p className="projects-sidebar__name">{activeProject.title}</p>
-            </div>
-
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Domain</p>
-              <p className="projects-sidebar__text">{activeProject.domain}</p>
-            </div>
-
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Project Summary</p>
-              <p className="projects-sidebar__goal">{activeProject.description}</p>
-            </div>
-
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Role</p>
-              <p className="projects-sidebar__text">{activeProject.role}</p>
-            </div>
-
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Tech Stack</p>
-              <p className="projects-sidebar__text">
-                {activeProject.technologies.join(", ")}
-              </p>
-            </div>
-
-            <div className="projects-sidebar__group">
-              <p className="projects-sidebar__label">Team Size</p>
-              <p className="projects-sidebar__text">{activeProject.team}</p>
-            </div>
-          </div>
-
-          <div className="projects-sidebar__group">
-            <p className="projects-sidebar__label">Rewards</p>
-            <div className="projects-sidebar__rewards">
-              {projectRewards.map((reward) => (
-                <div className="reward-card" key={reward.label}>
-                  <div className="reward-card__icon" aria-hidden="true" />
-                  <span className="reward-card__value">{reward.value}</span>
-                  <span className="reward-card__label">{reward.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="projects-sidebar__controls">
-            {projectControls.map((control) => (
-              <div className="control-row" key={control.label}>
-                <span>{control.label}</span>
-                <span className={`control-pill control-pill--${control.tone}`}>
-                  {control.state}
-                </span>
-              </div>
-            ))}
-          </div>
-        </aside>
       </div>
     </section>
   );

@@ -1,17 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
-const experienceProfileFields = [
-  { label: "Name", value: "DINH VO" },
-  { label: "Role", value: "Frontend / Fullstack Developer" },
-  { label: "Timeline", value: "2021 / 2026 Career Track", compact: true },
-];
-
-const experienceStatusBadges = [
-  { label: "Availability", value: "#OPENTOWORK", marker: "◁" },
-  { label: "Signal", value: "Product teams / Remote-friendly", marker: "⟫" },
-];
-
 const featuredExperiences = [
   {
     role: "Fullstack Developer",
@@ -77,17 +66,6 @@ const experienceTabs = [
   { title: "Next", caption: "More ownership, sharper systems, better communication." },
 ];
 
-const experienceRewards = [
-  { label: "Roles", value: "+04" },
-  { label: "Impact", value: "$1M" },
-];
-
-const experienceControls = [
-  { label: "React ecosystem", state: "✓", tone: "positive" },
-  { label: "Blockchain delivery", state: "✓", tone: "positive" },
-  { label: "Cross-team execution", state: "⚙", tone: "accent" },
-];
-
 const trackedRoles = featuredExperiences.length + earlierExperiences.length;
 const progressCurrent = trackedRoles;
 const progressTotal = trackedRoles;
@@ -105,48 +83,6 @@ export function Experience() {
     >
       <div className="experience-dossier__scanline" aria-hidden="true" />
       <div className="experience-dossier__layout">
-        <aside className="experience-panel experience-profile">
-          <div className="experience-profile__avatar" aria-hidden="true">
-            <span className="experience-profile__avatar-tag">XP</span>
-          </div>
-
-          {experienceProfileFields.map((field) => (
-            <div className="experience-profile__field" key={field.label}>
-              <p className="experience-profile__label">{field.label}</p>
-              <p
-                className={
-                  field.compact
-                    ? "experience-profile__value experience-profile__value--compact"
-                    : "experience-profile__value"
-                }
-              >
-                {field.value}
-              </p>
-            </div>
-          ))}
-
-          {experienceStatusBadges.map((badge) => (
-            <div className="experience-profile__field" key={badge.label}>
-              <p className="experience-profile__label">{badge.label}</p>
-              <p className="experience-profile__badge">
-                {badge.value}
-                <span aria-hidden="true">{badge.marker}</span>
-              </p>
-            </div>
-          ))}
-
-          <div className="experience-profile__motto">
-            <p className="experience-profile__label">Motto</p>
-            <p className="experience-profile__quote">
-              Ship with intent.
-              <br />
-              Learn in public.
-              <br />
-              Keep refining.
-            </p>
-          </div>
-        </aside>
-
         <section
           className="experience-main experience-panel"
           aria-labelledby="experience-dossier-title"
@@ -304,52 +240,6 @@ export function Experience() {
             ))}
           </div>
         </section>
-
-        <aside className="experience-panel experience-sidebar">
-          <p className="experience-sidebar__title">
-            <span>Active Quest</span>
-            <span aria-hidden="true">◁</span>
-          </p>
-          <p className="experience-sidebar__subtitle">Career Progression Line</p>
-
-          <div className="experience-sidebar__group">
-            <p className="experience-sidebar__label">Quest Name</p>
-            <p className="experience-sidebar__name">Frontend to exchange systems</p>
-          </div>
-
-          <div className="experience-sidebar__group">
-            <p className="experience-sidebar__label">Goal</p>
-            <p className="experience-sidebar__goal">
-              Keep growing from strong frontend delivery into broader fullstack
-              ownership, especially in blockchain products, exchange flows, and
-              high-impact product teams.
-            </p>
-          </div>
-
-          <div className="experience-sidebar__group">
-            <p className="experience-sidebar__label">Rewards</p>
-            <div className="experience-sidebar__rewards">
-              {experienceRewards.map((reward) => (
-                <div className="reward-card" key={reward.label}>
-                  <div className="reward-card__icon" aria-hidden="true" />
-                  <span className="reward-card__value">{reward.value}</span>
-                  <span className="reward-card__label">{reward.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="experience-sidebar__controls">
-            {experienceControls.map((control) => (
-              <div className="control-row" key={control.label}>
-                <span>{control.label}</span>
-                <span className={`control-pill control-pill--${control.tone}`}>
-                  {control.state}
-                </span>
-              </div>
-            ))}
-          </div>
-        </aside>
       </div>
     </section>
   );

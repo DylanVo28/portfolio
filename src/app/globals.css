@@ -15,6 +15,10 @@
   --line-strong: rgba(255, 62, 81, 0.6);
   --muted: #8e96a6;
   --shadow: 0 0 0 1px rgba(255, 62, 81, 0.18), 0 0 30px rgba(255, 0, 102, 0.08);
+  --shell-padding: clamp(16px, 2vw, 28px);
+  --side-panel-width: clamp(240px, 20vw, 280px);
+  --layout-gap: clamp(12px, 1.8vw, 20px);
+  --content-max-width: 1120px;
 }
 
 @theme inline {
@@ -73,11 +77,18 @@ button {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   gap: clamp(24px, 4vw, 48px);
+  width: 100%;
   min-height: 100vh;
-  /*padding: clamp(16px, 3vw, 36px);*/
+  padding: var(--shell-padding);
+}
+
+.landing-shell--fixed-asides > * {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
 }
 
 .cyber-banner {
@@ -86,7 +97,7 @@ button {
   /*width: min(100%, 1680px);*/
   height: 100vh;
   min-height: 100vh;
-  padding: clamp(18px, 2vw, 28px);
+  /*padding: clamp(18px, 2vw, 28px);*/
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.9)),
     radial-gradient(circle at 75% 35%, rgba(53, 207, 255, 0.08), transparent 24%);
@@ -661,6 +672,47 @@ button {
   outline-offset: 2px;
 }
 
+@media (min-width: 1321px) {
+  .landing-shell--fixed-asides {
+    padding-inline: calc(var(--shell-padding) + var(--side-panel-width) + var(--layout-gap));
+  }
+
+  .cyber-banner--fixed-asides {
+    height: calc(100vh - (var(--shell-padding) * 2));
+    min-height: calc(100vh - (var(--shell-padding) * 2));
+  }
+
+  .cyber-banner--fixed-asides .cyber-banner__layout {
+    grid-template-areas: "hero";
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .cyber-banner--fixed-asides .hero-panel {
+    min-height: 100%;
+  }
+
+  .cyber-banner--fixed-asides .profile-panel,
+  .cyber-banner--fixed-asides .contact-panel {
+    position: fixed;
+    top: var(--shell-padding);
+    width: var(--side-panel-width);
+    max-height: calc(100vh - (var(--shell-padding) * 2));
+    overflow: auto;
+    z-index: 4;
+    scrollbar-width: thin;
+  }
+
+  .cyber-banner--fixed-asides .profile-panel {
+    left: var(--shell-padding);
+  }
+
+  .cyber-banner--fixed-asides .contact-panel {
+    right: var(--shell-padding);
+  }
+}
+
 @keyframes scan-sweep {
   from {
     transform: translateY(-2%);
@@ -770,7 +822,7 @@ button {
   position: relative;
   isolation: isolate;
   /*width: min(100%, 1680px);*/
-  padding: clamp(18px, 2vw, 28px);
+  /*padding: clamp(18px, 2vw, 28px);*/
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.93)),
     radial-gradient(circle at 50% 48%, rgba(255, 0, 80, 0.08), transparent 22%),
@@ -877,10 +929,10 @@ button {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-areas: "profile records sidebar";
-  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr) minmax(240px, 280px);
+  grid-template-areas: "records";
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(12px, 1.8vw, 20px);
-  min-height: clamp(720px, 82vh, 940px);
+  min-height: auto;
 }
 
 .about-profile {
@@ -1022,7 +1074,7 @@ button {
   flex-direction: column;
   justify-content: space-between;
   min-width: 0;
-  padding: clamp(18px, 2vw, 28px);
+  /*padding: clamp(18px, 2vw, 28px);*/
   background:
     radial-gradient(circle at 50% 45%, rgba(120, 0, 10, 0.24), transparent 28%),
     linear-gradient(180deg, rgba(18, 0, 3, 0.7), rgba(2, 2, 4, 0.97));
@@ -1311,10 +1363,8 @@ button {
 
 @media (max-width: 1180px) {
   .about-dossier__layout {
-    grid-template-areas:
-      "records records"
-      "profile sidebar";
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "records";
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
   }
 
@@ -1338,10 +1388,7 @@ button {
   }
 
   .about-dossier__layout {
-    grid-template-areas:
-      "records"
-      "profile"
-      "sidebar";
+    grid-template-areas: "records";
     grid-template-columns: 1fr;
     min-height: auto;
   }
@@ -1368,7 +1415,7 @@ button {
 .experience-dossier {
   position: relative;
   isolation: isolate;
-  padding: clamp(18px, 2vw, 28px);
+  /*padding: clamp(18px, 2vw, 28px);*/
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.94)),
     radial-gradient(circle at 50% 48%, rgba(255, 0, 80, 0.08), transparent 22%),
@@ -1468,10 +1515,10 @@ button {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-areas: "profile main sidebar";
-  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr) minmax(240px, 280px);
+  grid-template-areas: "main";
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(12px, 1.8vw, 20px);
-  min-height: clamp(860px, 88vh, 1120px);
+  min-height: auto;
 }
 
 .experience-panel {
@@ -2146,10 +2193,8 @@ button {
 
 @media (max-width: 1180px) {
   .experience-dossier__layout {
-    grid-template-areas:
-      "main main"
-      "profile sidebar";
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "main";
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
   }
 
@@ -2184,10 +2229,7 @@ button {
   }
 
   .experience-dossier__layout {
-    grid-template-areas:
-      "main"
-      "profile"
-      "sidebar";
+    grid-template-areas: "main";
     grid-template-columns: 1fr;
     min-height: auto;
   }
@@ -2224,10 +2266,10 @@ button {
 
 .projects-dossier {
 
-  width: 100vw;
+  /*width: 100vw;*/
   position: relative;
   isolation: isolate;
-  padding: clamp(18px, 2vw, 28px);
+  /*padding: clamp(18px, 2vw, 28px);*/
   background:
     radial-gradient(circle at 0% 0%, rgba(255, 0, 64, 0.12), transparent 18%),
     radial-gradient(circle at 100% 0%, rgba(255, 0, 64, 0.1), transparent 22%),
@@ -2328,10 +2370,10 @@ button {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-areas: "profile main sidebar";
-  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr) minmax(240px, 280px);
+  grid-template-areas: "main";
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(12px, 1.8vw, 20px);
-  min-height: clamp(680px, 82vh, 900px);
+  min-height: auto;
 }
 
 .projects-panel,
@@ -3360,10 +3402,8 @@ button {
 
 @media (max-width: 1180px) {
   .projects-dossier__layout {
-    grid-template-areas:
-      "main main"
-      "profile sidebar";
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "main";
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
   }
 
@@ -3397,10 +3437,7 @@ button {
   }
 
   .projects-dossier__layout {
-    grid-template-areas:
-      "main"
-      "profile"
-      "sidebar";
+    grid-template-areas: "main";
     grid-template-columns: 1fr;
     min-height: auto;
   }
@@ -3589,10 +3626,10 @@ button {
 .contact-terminal__layout {
   display: grid;
   grid-template-areas:
-    "intro viewer quest"
-    "form viewer quest"
-    "form viewer controls";
-  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr) minmax(180px, 220px);
+    "intro viewer"
+    "form viewer"
+    "controls viewer";
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: clamp(16px, 2vw, 24px);
   min-height: clamp(760px, 84vh, 900px);
@@ -4259,12 +4296,12 @@ button {
 @media (max-width: 1320px) {
   .contact-terminal__layout {
     grid-template-areas:
-      "intro quest"
-      "form quest"
-      "viewer viewer"
-      "controls controls";
-    grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
-    grid-template-rows: auto auto minmax(520px, auto) auto;
+      "intro"
+      "form"
+      "viewer"
+      "controls";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
   .contact-viewer {
@@ -4281,7 +4318,6 @@ button {
   .contact-terminal__layout {
     grid-template-areas:
       "intro"
-      "quest"
       "form"
       "viewer"
       "controls";

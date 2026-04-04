@@ -4,11 +4,6 @@ const contactHudItems = [
   "FOCUS: REACT / NEXT.JS",
 ];
 
-const contactRewards = [
-  { icon: "UI", value: "+CRAFT" },
-  { icon: "FE", value: "+DELIVERY" },
-];
-
 const contactProfileLines = [
   "DINH VO",
   "FRONTEND DEVELOPER",
@@ -200,42 +195,6 @@ export function Contact() {
               </div>
             </div>
           </section>
-
-          <aside className="contact-quest">
-            <div className="contact-quest__title-row">
-              <span>ACTIVE QUEST</span>
-              <span aria-hidden="true">◁</span>
-            </div>
-
-            <div className="contact-quest__subtitle">THE PRODUCT INTERFACE LINE</div>
-
-            <div className="contact-quest__group">
-              <p className="contact-quest__label">QUEST NAME</p>
-              <p className="contact-quest__name">FRONTEND COLLABORATION</p>
-            </div>
-
-            <div className="contact-quest__group">
-              <p className="contact-quest__label">GOAL</p>
-              <p className="contact-quest__text">
-                TURN IDEAS INTO POLISHED, RESPONSIVE PRODUCT EXPERIENCES WITH
-                REACT, NEXT.JS, AND CLEAN VISUAL SYSTEMS THAT FEEL READY TO SHIP.
-              </p>
-            </div>
-
-            <div className="contact-quest__group">
-              <p className="contact-quest__label">REWARDS</p>
-              <div className="contact-quest__rewards">
-                {contactRewards.map((reward) => (
-                  <div className="contact-quest__reward" key={reward.value}>
-                    <div className="contact-quest__reward-icon" aria-hidden="true">
-                      {reward.icon}
-                    </div>
-                    <span>{reward.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </aside>
 
           <div className="contact-terminal__controls">
             {contactControls.map((control) => (

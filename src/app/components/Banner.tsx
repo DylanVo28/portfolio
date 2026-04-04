@@ -47,10 +47,8 @@ const contactItems = [
 
 export function Banner() {
   return (
-    <section className="cyber-banner" aria-label="Portfolio hero banner">
+    <section className="cyber-banner cyber-banner--fixed-asides" aria-label="Portfolio hero banner">
       <div className="cyber-banner__scanline" aria-hidden="true" />
-
-
 
       <div className="cyber-banner__layout">
         <aside className="cyber-panel profile-panel">
@@ -120,8 +118,6 @@ export function Banner() {
                 </span>
               ))}
             </div>
-
-
           </div>
 
           <div className="hero-panel__art" aria-hidden="true">
