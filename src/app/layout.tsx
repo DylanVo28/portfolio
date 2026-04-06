@@ -17,10 +17,44 @@ const bigShoulders = Big_Shoulders({
   weight: "variable",
 });
 
+const siteUrl = "https://portfolio-six-rosy-90.vercel.app";
+const siteTitle = "DINH VO | Frontend Developer";
+const siteDescription =
+  "Frontend developer with 4 years of experience building polished web interfaces with React, Next.js, and TypeScript.";
+
 export const metadata: Metadata = {
-  title: "DINH VO | Frontend Developer",
-  description:
-    "Frontend developer with 4 years of experience building polished web interfaces with React, Next.js, and TypeScript.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    siteName: "DINH VO Portfolio",
+    type: "website",
+    images: [
+      {
+        url: "/images/thumbnail.png",
+        width: 1725,
+        height: 1084,
+        alt: "DINH VO portfolio thumbnail",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/images/thumbnail.png",
+        alt: "DINH VO portfolio thumbnail",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
