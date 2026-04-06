@@ -65,9 +65,326 @@ body::before {
   z-index: 0;
 }
 
+.intro-controlled-main {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.985);
+  filter: blur(12px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 1200ms;
+}
+
+body[data-intro-page="revealed"] .intro-controlled-main {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0s;
+}
+
 ::selection {
   background: rgba(255, 68, 86, 0.32);
   color: #fff;
+}
+
+@keyframes intro-aura-pulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.3;
+  }
+  45% {
+    transform: scale(1.06);
+    opacity: 0.68;
+  }
+  100% {
+    transform: scale(1.14);
+    opacity: 0.24;
+  }
+}
+
+@keyframes intro-beam-sweep {
+  0% {
+    transform: translate3d(-40%, 0, 0) rotate(10deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.2;
+  }
+  46% {
+    opacity: 0.58;
+  }
+  100% {
+    transform: translate3d(260%, 0, 0) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+@keyframes intro-ring-expand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.78);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.36;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.24);
+    opacity: 0;
+  }
+}
+
+@keyframes intro-shell-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes intro-door-left-open {
+  0% {
+    transform: translateX(0);
+  }
+  12% {
+    transform: translateX(0);
+  }
+  78% {
+    transform: translateX(-98%);
+  }
+  100% {
+    transform: translateX(-108%);
+  }
+}
+
+@keyframes intro-door-right-open {
+  0% {
+    transform: translateX(0);
+  }
+  12% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(108%);
+  }
+}
+
+@keyframes intro-door-seam-pulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.2) scaleY(0.4);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(1.1) scaleY(1.02);
+  }
+}
+
+.intro-overlay__stage {
+  will-change: transform, opacity, filter;
+}
+
+.intro-overlay__backdrop--closing {
+  opacity: 0;
+  backdrop-filter: blur(0);
+  transition-delay: 180ms;
+  transition-duration: 920ms;
+}
+
+.intro-overlay__content {
+  will-change: transform, opacity, filter;
+}
+
+.intro-overlay__aura {
+  background:
+    radial-gradient(circle, rgba(255, 82, 82, 0.18) 0%, rgba(255, 27, 96, 0.08) 36%, transparent 68%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 48%);
+  filter: blur(20px);
+  animation: intro-aura-pulse 6.2s ease-in-out infinite alternate;
+}
+
+.intro-overlay__beam {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 115, 115, 0.24),
+    rgba(255, 255, 255, 0.04),
+    transparent
+  );
+  filter: blur(6px);
+  animation: intro-beam-sweep 4.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.intro-overlay__ring {
+  box-shadow:
+    0 0 0 1px rgba(255, 68, 86, 0.12),
+    0 0 90px rgba(255, 68, 86, 0.12);
+  animation: intro-ring-expand 4.2s ease-out infinite;
+  transition: opacity 380ms ease;
+}
+
+.intro-overlay__ring--delayed {
+  animation-delay: 1.8s;
+}
+
+.intro-overlay__shell {
+  animation: intro-shell-float 8s ease-in-out infinite;
+}
+
+.intro-overlay__shell--closing {
+  animation: none;
+}
+
+.intro-overlay__doors {
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.intro-overlay__doors--active {
+  opacity: 1;
+}
+
+.intro-door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 98, 98, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(10, 10, 16, 0.99), rgba(2, 2, 5, 0.99));
+  border: 1px solid rgba(255, 68, 86, 0.16);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 68, 86, 0.08),
+    inset 0 0 120px rgba(255, 68, 86, 0.05),
+    0 0 44px rgba(255, 68, 86, 0.14);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.intro-door::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 0, 85, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 85, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+.intro-door::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.9) 18%,
+      rgba(255, 82, 82, 0.94) 48%,
+      rgba(255, 255, 255, 0.88) 82%,
+      transparent 100%
+    );
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.28),
+    0 0 48px rgba(255, 68, 86, 0.42);
+  opacity: 0.94;
+}
+
+.intro-door > * {
+  pointer-events: none;
+}
+
+.intro-door--left {
+  left: 0;
+}
+
+.intro-door--left::after {
+  right: 0;
+}
+
+.intro-door--right {
+  right: 0;
+}
+
+.intro-door--right::after {
+  left: 0;
+}
+
+.intro-door--left-open {
+  animation: intro-door-left-open 1120ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-door--right-open {
+  animation: intro-door-right-open 1120ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-door__seam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 100vh;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 1) 16%,
+      rgba(255, 92, 92, 0.95) 50%,
+      rgba(255, 255, 255, 0.98) 84%,
+      transparent 100%
+    );
+  box-shadow:
+    0 0 28px rgba(255, 255, 255, 0.34),
+    0 0 64px rgba(255, 68, 86, 0.5),
+    0 0 120px rgba(255, 68, 86, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%) scaleX(0.2) scaleY(0.4);
+}
+
+.intro-door__seam--active {
+  animation: intro-door-seam-pulse 680ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-overlay__effect--closing {
+  transition: opacity 320ms ease-out;
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-door--left-open,
+  .intro-door--right-open,
+  .intro-door__seam--active,
+  .intro-overlay__aura,
+  .intro-overlay__beam,
+  .intro-overlay__ring,
+  .intro-overlay__shell {
+    animation: none !important;
+  }
 }
 
 button {
