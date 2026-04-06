@@ -159,14 +159,14 @@ export function Contact() {
             </div>
           </section>
 
-          <div className="contact-terminal__controls">
-            {contactControls.map((control) => (
-              <div className="contact-terminal__control-row" key={control.label}>
-                <span>{control.label}</span>
-                <span className="contact-terminal__control-pill">{control.state}</span>
-              </div>
-            ))}
-          </div>
+          {/*<div className="contact-terminal__controls">*/}
+          {/*  {contactControls.map((control) => (*/}
+          {/*    <div className="contact-terminal__control-row" key={control.label}>*/}
+          {/*      <span>{control.label}</span>*/}
+          {/*      <span className="contact-terminal__control-pill">{control.state}</span>*/}
+          {/*    </div>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
         </div>
       </div>
     </section>
