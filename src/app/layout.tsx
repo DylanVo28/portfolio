@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Iceland, Orbitron } from "next/font/google";
+import { Big_Shoulders, Iceland } from "next/font/google";
 import "./globals.css";
 
 const iceland = Iceland({
   variable: "--font-iceland",
+  display: "swap",
   weight: "400",
   subsets: ["latin"],
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
-  subsets: ["latin"],
+const bigShoulders = Big_Shoulders({
+  axes: ["opsz"],
+  display: "swap",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-big-shoulders",
+  weight: "variable",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${iceland.variable} ${orbitron.variable}`}>
+      <body className={`${iceland.variable} ${bigShoulders.variable}`}>
         {children}
       </body>
     </html>
