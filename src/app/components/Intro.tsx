@@ -225,7 +225,7 @@ export function Intro({ ctaLabel = "Access portfolio" }: IntroProps) {
             >
 
               <h2
-                className={`mb-7 font-display text-[clamp(20px,1.45vw,28px)] font-bold uppercase tracking-[0.16em] text-[rgba(255,255,255,0.95)] transition-[transform,opacity,letter-spacing] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:mb-12 ${
+                className={`mb-4 font-display text-[clamp(20px,1.45vw,28px)] font-bold uppercase tracking-[0.16em] text-[rgba(255,255,255,0.95)] transition-[transform,opacity,letter-spacing] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:mb-12 ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
                 id="intro-title"
@@ -238,7 +238,7 @@ export function Intro({ ctaLabel = "Access portfolio" }: IntroProps) {
               </h2>
 
               <p
-                className={`mb-6 max-w-[720px] font-sans text-[clamp(13px,0.95vw,16px)] leading-[1.9] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.88)] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`mb-2 max-w-[720px] font-sans text-[clamp(13px,0.95vw,16px)] leading-[1.9] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.88)] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
                 style={{ transitionDelay: "460ms" }}
@@ -250,7 +250,7 @@ export function Intro({ ctaLabel = "Access portfolio" }: IntroProps) {
               </p>
 
               <p
-                className={`mb-10 max-w-[720px] font-sans text-[clamp(13px,0.95vw,16px)] leading-[1.9] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.88)] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:mb-[46px] ${
+                className={`mb-4 max-w-[720px] font-sans text-[clamp(13px,0.95vw,16px)] leading-[1.9] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.88)] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:mb-[46px] ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
                 style={{ transitionDelay: "560ms" }}
