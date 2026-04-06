@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useEffectEvent,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 
 type ProjectLink = {
   label: string;
@@ -255,6 +260,7 @@ const projects: Project[] = [
 ];
 
 const CAROUSEL_TRANSITION_MS = 460;
+const CAROUSEL_AUTOPLAY_MS = 6800;
 
 function getWrappedIndex(index: number) {
   return (index + projects.length) % projects.length;
@@ -264,12 +270,41 @@ export function Projects() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [carouselTransition, setCarouselTransition] =
     useState<CarouselTransition>(null);
+  const [isCarouselHovered, setIsCarouselHovered] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  const requestCarouselTransition = (direction: CarouselDirection) => {
+    setCarouselTransition((currentTransition) =>
+      currentTransition ?? { direction, phase: "prep" },
+    );
+  };
+
+  const autoplayNextProject = useEffectEvent(
+    (direction: CarouselDirection) => {
+      requestCarouselTransition(direction);
+    },
+  );
 
   const activeProject = projects[activeProjectIndex];
   const leftProject = projects[getWrappedIndex(activeProjectIndex - 1)];
   const rightProject = projects[getWrappedIndex(activeProjectIndex + 1)];
   const progressWidth = `${((activeProjectIndex + 1) / projects.length) * 100}%`;
   const isCarouselAnimating = carouselTransition !== null;
+  const activeProjectNumber = String(activeProjectIndex + 1).padStart(2, "0");
+  const totalProjectCount = String(projects.length).padStart(2, "0");
+  const activeHeroLabel = activeProject.heroLabel ?? activeProject.title.toUpperCase();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncReducedMotionPreference = () =>
+      setPrefersReducedMotion(mediaQuery.matches);
+
+    syncReducedMotionPreference();
+    mediaQuery.addEventListener("change", syncReducedMotionPreference);
+
+    return () =>
+      mediaQuery.removeEventListener("change", syncReducedMotionPreference);
+  }, []);
 
   useEffect(() => {
     if (carouselTransition?.phase !== "prep") {
@@ -304,20 +339,46 @@ export function Projects() {
     return () => window.clearTimeout(timeoutId);
   }, [carouselTransition]);
 
-  const showPreviousProject = () => {
-    if (isCarouselAnimating) {
-      return;
+  useEffect(() => {
+    if (prefersReducedMotion || isCarouselHovered || carouselTransition) {
+      return undefined;
     }
 
-    setCarouselTransition({ direction: "prev", phase: "prep" });
+    const timeoutId = window.setTimeout(() => {
+      autoplayNextProject("next");
+    }, CAROUSEL_AUTOPLAY_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeProjectIndex, carouselTransition, isCarouselHovered, prefersReducedMotion]);
+
+  const showPreviousProject = () => {
+    requestCarouselTransition("prev");
   };
 
   const showNextProject = () => {
-    if (isCarouselAnimating) {
+    requestCarouselTransition("next");
+  };
+
+  const handleCarouselCardKeyDown = (
+    event: ReactKeyboardEvent<HTMLElement>,
+    slot: CarouselSlot,
+  ) => {
+    if (slot !== "left" && slot !== "right") {
       return;
     }
 
-    setCarouselTransition({ direction: "next", phase: "prep" });
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (slot === "left") {
+      showPreviousProject();
+      return;
+    }
+
+    showNextProject();
   };
 
   const getCarouselCards = () => {
@@ -369,53 +430,98 @@ export function Projects() {
 
   const renderCarouselCard = (project: Project, slot: CarouselSlot) => {
     const sideLines = project.sideHeadingLines ?? project.sideHeadlineLines ?? [];
+    const telemetry = [
+      project.category.split("/")[0]?.trim(),
+      project.technologies[0],
+      project.technologies[1] ?? project.team,
+    ].filter(Boolean);
+    const isInteractiveSlot = slot === "left" || slot === "right";
 
     return (
       <article
-        className={`project-card-3d project-card-3d--slot-${slot}`}
+        aria-label={
+          isInteractiveSlot
+            ? `${slot === "left" ? "Show previous" : "Show next"} project: ${project.title}`
+            : `${project.title} project preview`
+        }
+        className={`project-card-3d project-card-3d--slot-${slot}${
+          isInteractiveSlot ? " project-card-3d--interactive" : ""
+        }`}
         key={project.title}
+        onClick={
+          isInteractiveSlot
+            ? () => {
+                if (slot === "left") {
+                  showPreviousProject();
+                  return;
+                }
+
+                showNextProject();
+              }
+            : undefined
+        }
+        onKeyDown={
+          isInteractiveSlot
+            ? (event) => handleCarouselCardKeyDown(event, slot)
+            : undefined
+        }
+        role={isInteractiveSlot ? "button" : undefined}
+        tabIndex={isInteractiveSlot ? 0 : undefined}
       >
-        <p className="project-card__published-label">{project.published}</p>
+        <div className="project-card__shell">
+          <div className="project-card__ambient project-card__ambient--aura" aria-hidden="true" />
+          <div className="project-card__ambient project-card__ambient--grid" aria-hidden="true" />
 
-        <div className="project-card__media-frame">
-          <Image
-            alt={`${project.title} preview`}
-            className="project-card__image"
-            fill
-            priority={slot === "center" && activeProjectIndex === 0}
-            sizes="(max-width: 820px) 100vw, 370px"
-            src={project.image}
-          />
-          <div className="project-card__image-overlay" aria-hidden="true" />
+          <p className="project-card__published-label">{project.published}</p>
 
-          <div className="project-card__top-menu">
-            <span>{project.menuLeft}</span>
-            <span>{project.menuRight}</span>
+          <div className="project-card__media-frame">
+            <Image
+              alt={`${project.title} preview`}
+              className="project-card__image"
+              fill
+              priority={slot === "center" && activeProjectIndex === 0}
+              sizes="(max-width: 820px) 100vw, 390px"
+              src={project.image}
+            />
+            <div className="project-card__image-overlay" aria-hidden="true" />
+            <div className="project-card__beam" aria-hidden="true" />
+
+            <div className="project-card__top-menu">
+              <span>{project.menuLeft}</span>
+              <span>{project.menuRight}</span>
+            </div>
+
+            <div className="project-card__hero-lockup">
+              <span className="project-card__hero-kicker">Featured mission</span>
+              <p className="project-card__headline">
+                {project.heroLabel ?? project.title.toUpperCase()}
+              </p>
+            </div>
+
+            <div className="project-card__telemetry" aria-hidden="true">
+              {telemetry.map((item) => (
+                <span key={`${project.title}-${item}`}>{item}</span>
+              ))}
+            </div>
+
+            <p className="project-card__side-menu">{project.sideMenu}</p>
+
+            <p className="project-card__side-title">
+              {sideLines.map((line) => (
+                <span key={`${project.title}-${line}`}>{line}</span>
+              ))}
+            </p>
           </div>
 
-          {/*<p className="project-card__headline">{project.heroLabel}</p>*/}
-          <p className="project-card__side-menu">{project.sideMenu}</p>
-
-          <p className="project-card__side-title">
-            {sideLines.map((line) => (
-              <span key={`${project.title}-${line}`}>{line}</span>
-            ))}
+          <p className="project-card__action">
+            {slot === "center" ? "Open Case" : "Shift"}
           </p>
 
-          {/*<div className="project-card__bottom-strip" aria-hidden="true">*/}
-          {/*  <div className="project-card__strip project-card__strip--route" />*/}
-          {/*  <div className="project-card__strip project-card__strip--surface" />*/}
-          {/*  <div className="project-card__strip project-card__strip--accent" />*/}
-          {/*  <div className="project-card__strip project-card__strip--light" />*/}
-          {/*</div>*/}
+          <p className="project-card__caption">
+            {project.title}
+            <small>{project.category}</small>
+          </p>
         </div>
-
-        <p className="project-card__action">Case File</p>
-
-        <p className="project-card__caption">
-          {project.title}
-          <small>{project.category}</small>
-        </p>
       </article>
     );
   };
@@ -434,7 +540,31 @@ export function Projects() {
           <div className="projects-main__inner">
             <p className="projects-main__page-title">Projects</p>
 
-            <div className="projects-carousel" aria-label="Selected project previews">
+            <div
+              className="projects-carousel"
+              aria-label="Selected project previews"
+              data-transition-direction={carouselTransition?.direction ?? "idle"}
+              data-transition-phase={carouselTransition?.phase ?? "idle"}
+              onMouseEnter={() => setIsCarouselHovered(true)}
+              onMouseLeave={() => setIsCarouselHovered(false)}
+            >
+              <div className="projects-carousel__atmosphere" aria-hidden="true">
+                <div className="projects-carousel__backglow" />
+                <div className="projects-carousel__orbit projects-carousel__orbit--outer" />
+                <div className="projects-carousel__orbit projects-carousel__orbit--inner" />
+                <div className="projects-carousel__beam-sweep" />
+                <div className="projects-carousel__horizon" />
+                <div className="projects-carousel__signal-stack" key={activeProject.title}>
+                  <span className="projects-carousel__signal-label">
+                    Featured Transmission
+                  </span>
+                  <strong>{activeHeroLabel}</strong>
+                  <span className="projects-carousel__signal-meta">
+                    {activeProjectNumber} / {totalProjectCount}
+                  </span>
+                </div>
+              </div>
+
               <button
                 className="projects-carousel__arrow projects-carousel__arrow--left"
                 aria-label="Show previous project"
@@ -459,27 +589,29 @@ export function Projects() {
             </div>
 
             <div className="projects-copy">
-              <h2 className="projects-copy__title" id="projects-dossier-title">
-                {activeProject.title}
-              </h2>
-              <p className="projects-copy__sub">{activeProject.category}</p>
-              <p className="projects-copy__domain">{activeProject.domain}</p>
-              <p className="projects-copy__desc">{activeProject.description}</p>
+              <div className="projects-copy__panel" key={activeProject.title}>
+                <h2 className="projects-copy__title" id="projects-dossier-title">
+                  {activeProject.title}
+                </h2>
+                <p className="projects-copy__sub">{activeProject.category}</p>
+                <p className="projects-copy__domain">{activeProject.domain}</p>
+                <p className="projects-copy__desc">{activeProject.description}</p>
 
-              <div className="projects-copy__meta">
-                <div className="projects-copy__meta-row">
-                  <span className="projects-copy__meta-label">Role</span>
-                  <span className="projects-copy__meta-value">{activeProject.role}</span>
-                </div>
-                <div className="projects-copy__meta-row">
-                  <span className="projects-copy__meta-label">Technologies</span>
-                  <span className="projects-copy__meta-value">
-                    {activeProject.technologies.join(", ")}
-                  </span>
-                </div>
-                <div className="projects-copy__meta-row">
-                  <span className="projects-copy__meta-label">Team Size</span>
-                  <span className="projects-copy__meta-value">{activeProject.team}</span>
+                <div className="projects-copy__meta">
+                  <div className="projects-copy__meta-row">
+                    <span className="projects-copy__meta-label">Role</span>
+                    <span className="projects-copy__meta-value">{activeProject.role}</span>
+                  </div>
+                  <div className="projects-copy__meta-row">
+                    <span className="projects-copy__meta-label">Technologies</span>
+                    <span className="projects-copy__meta-value">
+                      {activeProject.technologies.join(", ")}
+                    </span>
+                  </div>
+                  <div className="projects-copy__meta-row">
+                    <span className="projects-copy__meta-label">Team Size</span>
+                    <span className="projects-copy__meta-value">{activeProject.team}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -493,7 +625,8 @@ export function Projects() {
                 <div className="projects-progress__tail" />
               </div>
               <div className="projects-progress__fraction">
-                {activeProjectIndex + 1}/{projects.length}
+                <span>{activeProjectNumber}</span>
+                <span>{totalProjectCount} cases in orbit</span>
               </div>
             </div>
 
