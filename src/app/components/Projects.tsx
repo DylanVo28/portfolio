@@ -486,17 +486,6 @@ export function Projects() {
             <div className="project-card__image-overlay" aria-hidden="true" />
             <div className="project-card__beam" aria-hidden="true" />
 
-            <div className="project-card__top-menu">
-              <span>{project.menuLeft}</span>
-              <span>{project.menuRight}</span>
-            </div>
-
-            <div className="project-card__hero-lockup">
-              <span className="project-card__hero-kicker">Featured mission</span>
-              <p className="project-card__headline">
-                {project.heroLabel ?? project.title.toUpperCase()}
-              </p>
-            </div>
 
             <div className="project-card__telemetry" aria-hidden="true">
               {telemetry.map((item) => (
@@ -548,22 +537,7 @@ export function Projects() {
               onMouseEnter={() => setIsCarouselHovered(true)}
               onMouseLeave={() => setIsCarouselHovered(false)}
             >
-              <div className="projects-carousel__atmosphere" aria-hidden="true">
-                <div className="projects-carousel__backglow" />
-                <div className="projects-carousel__orbit projects-carousel__orbit--outer" />
-                <div className="projects-carousel__orbit projects-carousel__orbit--inner" />
-                <div className="projects-carousel__beam-sweep" />
-                <div className="projects-carousel__horizon" />
-                <div className="projects-carousel__signal-stack" key={activeProject.title}>
-                  <span className="projects-carousel__signal-label">
-                    Featured Transmission
-                  </span>
-                  <strong>{activeHeroLabel}</strong>
-                  <span className="projects-carousel__signal-meta">
-                    {activeProjectNumber} / {totalProjectCount}
-                  </span>
-                </div>
-              </div>
+
 
               <button
                 className="projects-carousel__arrow projects-carousel__arrow--left"

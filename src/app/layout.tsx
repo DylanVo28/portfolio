@@ -17,7 +17,7 @@ const bigShoulders = Big_Shoulders({
   weight: "variable",
 });
 
-const siteUrl = "https://portfolio-six-rosy-90.vercel.app";
+const siteUrl = "https://www.dinhvdk.xyz";
 const siteTitle = "DINH VO | Frontend Developer";
 const siteDescription =
   "Frontend developer with 4 years of experience building polished web interfaces with React, Next.js, and TypeScript.";

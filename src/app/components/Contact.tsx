@@ -39,7 +39,7 @@ const contactLinks = [
   },
   {
     label: "My Website",
-    links: [{ href: "https://portfolio-six-rosy-90.vercel.app", text: "https://portfolio-six-rosy-90.vercel.app" }],
+    links: [{ href: "https://www.dinhvdk.xyz", text: "https://www.dinhvdk.xyz" }],
   },
 ];
 
