@@ -284,25 +284,43 @@ body[data-intro-page="revealed"] .intro-controlled-main {
   }
 }
 
-@keyframes intro-horizon-draw {
+@keyframes intro-horizon-left-open {
   0% {
-    transform: scaleX(0.04);
+    transform: translateY(-50%) translateX(0) scaleX(0.04);
     opacity: 0;
   }
   18% {
     opacity: 0.98;
   }
-  76% {
-    transform: scaleX(1);
-    opacity: 0.96;
+  42% {
+    transform: translateY(-50%) translateX(0) scaleX(1);
+    opacity: 1;
   }
   100% {
-    transform: scaleX(1.12);
-    opacity: 0.68;
+    transform: translateY(-50%) translateX(-126%) scaleX(1.02);
+    opacity: 1;
   }
 }
 
-@keyframes intro-horizon-core-burst {
+@keyframes intro-horizon-right-open {
+  0% {
+    transform: translateY(-50%) translateX(0) scaleX(0.04);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.98;
+  }
+  42% {
+    transform: translateY(-50%) translateX(0) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) translateX(126%) scaleX(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes intro-horizon-core-split {
   0% {
     transform: translate(-50%, -50%) scaleX(0.12);
     opacity: 0;
@@ -310,22 +328,12 @@ body[data-intro-page="revealed"] .intro-controlled-main {
   18% {
     opacity: 1;
   }
-  52% {
-    transform: translate(-50%, -50%) scaleX(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scaleX(2.4);
-    opacity: 0;
-  }
-}
-
-@keyframes intro-horizon-fade {
-  0%,
   34% {
+    transform: translate(-50%, -50%) scaleX(1.8);
     opacity: 1;
   }
   100% {
+    transform: translate(-50%, -50%) scaleX(0.08);
     opacity: 0;
   }
 }
@@ -401,26 +409,30 @@ body[data-intro-page="revealed"] .intro-controlled-main {
 
 .intro-overlay__horizon {
   position: relative;
+  height: 100%;
   overflow: visible;
-}
-
-.intro-overlay__horizon--closing {
-  animation: intro-horizon-fade 900ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards;
 }
 
 .intro-overlay__horizon-line {
   position: absolute;
   top: 50%;
-  height: 1px;
+  height: 2px;
   transform: translateY(-50%);
   box-shadow:
-    0 0 24px rgba(255, 108, 108, 0.18),
-    0 0 58px rgba(255, 68, 86, 0.16);
+    0 0 18px rgba(255, 255, 255, 0.26),
+    0 0 34px rgba(255, 108, 108, 0.28),
+    0 0 82px rgba(255, 68, 86, 0.24);
+  mix-blend-mode: screen;
 }
 
 .intro-overlay__horizon-line--base {
   inset-inline: 0;
   background: linear-gradient(90deg, transparent, rgba(255, 91, 91, 0.55), transparent);
+  transition: opacity 120ms linear;
+}
+
+.intro-overlay__horizon-line--base-hidden {
+  opacity: 0;
 }
 
 .intro-overlay__horizon-line--left,
@@ -438,8 +450,8 @@ body[data-intro-page="revealed"] .intro-controlled-main {
     linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 84, 84, 0.2) 58%,
-      rgba(255, 120, 120, 0.72) 82%,
+      rgba(255, 84, 84, 0.26) 52%,
+      rgba(255, 120, 120, 0.82) 80%,
       rgba(255, 255, 255, 0.98) 100%
     );
 }
@@ -452,22 +464,26 @@ body[data-intro-page="revealed"] .intro-controlled-main {
     linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.98) 0%,
-      rgba(255, 120, 120, 0.72) 18%,
-      rgba(255, 84, 84, 0.2) 42%,
+      rgba(255, 120, 120, 0.82) 20%,
+      rgba(255, 84, 84, 0.26) 48%,
       transparent 100%
     );
 }
 
-.intro-overlay__horizon-line--closing {
-  animation: intro-horizon-draw 760ms cubic-bezier(0.22, 1, 0.36, 1) 40ms forwards;
+.intro-overlay__horizon-line--left.intro-overlay__horizon-line--closing {
+  animation: intro-horizon-left-open 1160ms cubic-bezier(0.22, 1, 0.36, 1) 30ms forwards;
+}
+
+.intro-overlay__horizon-line--right.intro-overlay__horizon-line--closing {
+  animation: intro-horizon-right-open 1160ms cubic-bezier(0.22, 1, 0.36, 1) 30ms forwards;
 }
 
 .intro-overlay__horizon-core {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 40px;
-  height: 3px;
+  width: 72px;
+  height: 6px;
   border-radius: 999px;
   background:
     linear-gradient(
@@ -479,16 +495,18 @@ body[data-intro-page="revealed"] .intro-controlled-main {
       rgba(255, 255, 255, 0)
     );
   box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.42),
-    0 0 42px rgba(255, 68, 86, 0.44);
+    0 0 24px rgba(255, 255, 255, 0.5),
+    0 0 56px rgba(255, 68, 86, 0.58),
+    0 0 120px rgba(255, 68, 86, 0.24);
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scaleX(0.12);
   will-change: transform, opacity;
+  mix-blend-mode: screen;
 }
 
 .intro-overlay__horizon-core--closing {
-  animation: intro-horizon-core-burst 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: intro-horizon-core-split 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .intro-overlay__ring {
@@ -643,7 +661,6 @@ body[data-intro-page="revealed"] .intro-controlled-main {
   .intro-overlay__backdrop--closing,
   .intro-overlay__stage--closing,
   .intro-overlay__content--closing,
-  .intro-overlay__horizon--closing,
   .intro-overlay__ornament--closing,
   .intro-overlay__flare--closing,
   .intro-overlay__aura--closing,
