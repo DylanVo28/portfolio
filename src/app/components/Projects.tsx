@@ -83,6 +83,12 @@ const projects: Project[] = [
     sideMenu: "Trade · Search · Charts · Tokens",
     sideHeadingLines: ["What", "Swap"],
     sideHeadlineLines: ["Multi-chain", "token trading"],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://what-screener.vercel.app/",
+      },
+    ],
   },
   {
     title: "What Exchange",
@@ -117,6 +123,12 @@ const projects: Project[] = [
     sideMenu: "Perps · Spot · API Wallet · Charts",
     sideHeadingLines: ["What", "Exchange"],
     sideHeadlineLines: ["Hyperliquid", "trading desk"],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://trade.what.exchange/",
+      },
+    ],
   },
   {
     title: "Starship",
@@ -256,6 +268,12 @@ const projects: Project[] = [
     sideMenu: "Posts · Paid Q&A · Wallet · Realtime",
     sideHeadingLines: ["Blog", "Website"],
     sideHeadlineLines: ["Monetized", "author platform"],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://blog-frontend-rouge-two.vercel.app/",
+      },
+    ],
   },
 ];
 
