@@ -183,10 +183,27 @@ export function Intro({ ctaLabel = "Access portfolio" }: IntroProps) {
       <div
         aria-hidden="true"
         className={`pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 ${
-          isClosing ? "intro-overlay__ornament--closing" : "opacity-100"
+          isClosing ? "intro-overlay__horizon--closing" : "opacity-100"
         }`}
       >
-        <div className="intro-overlay__horizon h-full w-full bg-[linear-gradient(90deg,transparent,rgba(255,91,91,0.55),transparent)]" />
+        <div className="intro-overlay__horizon h-full w-full">
+          <div className="intro-overlay__horizon-line intro-overlay__horizon-line--base" />
+          <div
+            className={`intro-overlay__horizon-core ${
+              isClosing ? "intro-overlay__horizon-core--closing" : ""
+            }`}
+          />
+          <div
+            className={`intro-overlay__horizon-line intro-overlay__horizon-line--left ${
+              isClosing ? "intro-overlay__horizon-line--closing" : ""
+            }`}
+          />
+          <div
+            className={`intro-overlay__horizon-line intro-overlay__horizon-line--right ${
+              isClosing ? "intro-overlay__horizon-line--closing" : ""
+            }`}
+          />
+        </div>
       </div>
 
       <div
